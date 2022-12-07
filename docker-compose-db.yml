@@ -14,3 +14,14 @@ services:
     volumes:
       - "/usr/local/docker/mydata/mysql/data:/var/lib/mysql" # 存放数据文件
       - "/usr/local/docker/mydata/mysql/log:/var/log/mysql"  # 存放日志文件
+
+  redis:
+    build:
+      context: deploy/redis
+      dockerfile: Dockerfile
+    container_name: ct_redis
+    volumes:
+      - /usr/local/docker/mydata/redis/data:/data
+    restart: always
+    ports:
+      - "6379:6379"

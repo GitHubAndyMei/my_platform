@@ -6,3 +6,6 @@ up-db:
 
 down-db:
 	@docker-compose -f docker-compose-db.yml down
+
+restart-db:
+	@docker-compose -f docker-compose-db.yml restart
