@@ -1,0 +1,17 @@
+version: '3.0'
+services:
+  mysql:
+    build:
+      context: deploy/mysql
+      dockerfile: Dockerfile
+    # image: mysql:8.0
+    container_name: ct_db
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root # root密码
+      MYSQL_DATABASE: ct_db
+    volumes:
+      - "/usr/local/docker/mydata/mysql/data:/var/lib/mysql" # 存放数据文件
+      - "/usr/local/docker/mydata/mysql/log:/var/log/mysql"  # 存放日志文件
