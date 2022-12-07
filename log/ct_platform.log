@@ -1,0 +1,16 @@
+2022-12-06 22:57:53,714|ERROR|controller.py call_view_func 41|Traceback (most recent call last):
+  File "/mnt/c/my_space/ct_platform/app/api/base/controller.py", line 34, in call_view_func
+    request_obj.to_obj(request_dict)
+  File "/mnt/c/my_space/ct_platform/external/protocol/python/query_demo_request.py", line 76, in to_obj
+    if data_dict.get("age") < 0:
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+2022-12-06 22:57:53,715|ERROR|controller.py call_view_func 42|系统异常:'<' not supported between instances of 'str' and 'int'
+2022-12-06 23:03:04,664|ERROR|controller.py call_view_func 41|Traceback (most recent call last):
+  File "/mnt/c/my_space/ct_platform/app/api/base/controller.py", line 34, in call_view_func
+    request_obj.to_obj(request_dict)
+  File "/mnt/c/my_space/ct_platform/external/protocol/python/query_demo_request.py", line 76, in to_obj
+    if data_dict.get("age") < 0:
+TypeError: '<' not supported between instances of 'str' and 'int'
+
+2022-12-06 23:03:06,193|ERROR|controller.py call_view_func 42|系统异常:'<' not supported between instances of 'str' and 'int'

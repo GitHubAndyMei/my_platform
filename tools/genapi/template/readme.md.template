@@ -1,0 +1,185 @@
+<%
+import time
+from common import PARAM_TYPE_DICT,PYTHON_VAR_TYPE_DICT,G_INFO_DEFINE_DICT
+%>\
+# 					CT平台接口协议
+
+<%
+SERVICE_INDEX = 0
+API_INDEX = 0
+%>\
+% for import_name, service in SERVICE_DICT.items():
+<%
+	SERVICE_INDEX += 1
+	HEAD = "##"
+%>\
+${HEAD} ${SERVICE_INDEX}.${service.comment}
+
+
+	% for api in service.api_list:
+<%
+	API_INDEX += 1
+	HEAD = "###"
+%>\
+${HEAD} ${API_INDEX}.接口: ${api.comment}
+**类型: ${api.type} **
+
+**url: ${api.url} **
+
+**request:**
+| 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
+| - | - | - | - | - | - |
+		% for field in api.request.fields:
+<%
+	MIN = field.min
+	MAX = field.max
+	if not field.min_check:
+		MIN = ""
+	if not field.max_check:
+		MAX = ""
+
+%>\
+| ${field.name}|${field.type}|${MIN}|${MAX}|${field.comment}|${field.init_value}|
+		% endfor
+
+**请求示例：**
+```json
+{
+		% for field in api.request.fields[0:-1]:
+			% if "vector" in field.type:
+	"${field.name}":[],
+			% elif field.type not in PARAM_TYPE_DICT:
+	"${field.name}":{},
+			%else:
+	"${field.name}":${field.init_value},
+			% endif
+		% endfor
+		% if len( api.request.fields ) > 0:
+<%
+			# 处理最后一个
+			field = api.request.fields[-1]
+%>\
+			% if "vector" in field.type:
+	"${field.name}":[]
+			% elif field.type not in PARAM_TYPE_DICT:
+	"${field.name}":{}
+			%else:
+	"${field.name}":${field.init_value}
+			% endif
+		% endif
+}
+```
+
+
+
+**response：**
+| 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
+| - | - | - | - | - | - |
+		% for field in api.response.fields:
+<%
+	MIN = field.min
+	MAX = field.max
+	if not field.min_check:
+		MIN = ""
+	if not field.max_check:
+		MAX = ""
+
+%>\
+| ${field.name}|${field.type}|${MIN}|${MAX}|${field.comment}|${field.init_value}|
+		% endfor
+
+**应答示例：**
+```json
+{
+		% for field in api.response.fields[0:-1]:
+			% if "vector" in field.type:
+	"${field.name}":[],
+			% elif field.type not in PARAM_TYPE_DICT:
+	"${field.name}":{},
+			%else:
+	"${field.name}":${field.init_value},
+			% endif
+		% endfor
+		% if len( api.response.fields ) > 0:
+<%
+			# 处理最后一个
+			field = api.response.fields[-1]
+%>\
+			% if "vector" in field.type:
+	"${field.name}":[]
+			% elif field.type not in PARAM_TYPE_DICT:
+	"${field.name}":{}
+			%else:
+	"${field.name}":${field.init_value}
+			% endif
+		% endif
+}
+```
+
+
+
+	% endfor
+
+
+
+% endfor
+<%
+	INFO_INDEX = 0
+	SERVICE_INDEX += 1
+	HEAD = "##"
+%>\
+${HEAD} ${SERVICE_INDEX}.公共数据结构
+
+% for import_name,info in G_INFO_DEFINE_DICT.items():
+<%
+	INFO_INDEX += 1
+	HEAD = "###"
+%>\
+${HEAD} ${INFO_INDEX}.${info.name}: ${info.comment}
+
+| 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
+| - | - | - | - | - | - |
+		% for field in info.fields:
+<%
+	MIN = field.min
+	MAX = field.max
+	if not field.min_check:
+		MIN = ""
+	if not field.max_check:
+		MAX = ""
+
+%>\
+| ${field.name}|${field.type}|${MIN}|${MAX}|${field.comment}|${field.init_value}|
+		% endfor
+
+**示例：**
+```json
+{
+		% for field in info.fields[0:-1]:
+			% if "vector" in field.type:
+	"${field.name}":[],
+			% elif field.type not in PARAM_TYPE_DICT:
+	"${field.name}":{},
+			%else:
+	"${field.name}":${field.init_value},
+			% endif
+		% endfor
+		% if len( info.fields ) > 0:
+<%
+			# 处理最后一个
+			field = info.fields[-1]
+%>\
+			% if "vector" in field.type:
+	"${field.name}":[]
+			% elif field.type not in PARAM_TYPE_DICT:
+	"${field.name}":{}
+			%else:
+	"${field.name}":${field.init_value}
+			% endif
+		% endif
+}
+```
+
+
+
+% endfor
