@@ -4,7 +4,6 @@ services:
     build:
       context: deploy/mysql
       dockerfile: Dockerfile
-    # image: mysql:8.0
     container_name: ct_db
     restart: always
     ports:
