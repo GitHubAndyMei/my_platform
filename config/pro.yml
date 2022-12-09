@@ -1,0 +1,19 @@
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  user: momenta
+  password: momenta
+  db: ct_db
+  autocommit: true
+
+redis:
+  host: 127.0.0.1
+  port: 6379
+  password: momenta
+  charset: utf-8
+  db: 0
+  decode_response: True
+
+jwt:
+  key: d41d8cd98f00b204e9800998ecf8427e
+  ex: 60
