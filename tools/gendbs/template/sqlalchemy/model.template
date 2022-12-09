@@ -8,7 +8,7 @@ table ${TABLE.name} data model.
 """
 
 import enum
-from models.base import Base
+from app.model.base import Base
 from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text
 
 <%

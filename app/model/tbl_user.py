@@ -4,7 +4,7 @@ table t_user data model.
 """
 
 import enum
-from models.base import Base
+from .base import Base
 from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text
 
 class EnumTblUserDeleted(enum.Enum):
