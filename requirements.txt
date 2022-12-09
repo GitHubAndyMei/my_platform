@@ -4,5 +4,4 @@ PyYAML==6.0
 PyJWT==2.4.0
 PyMySQL==1.0.2
 redis==4.3.3
-
 Mako==1.1.6
