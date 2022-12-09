@@ -17,4 +17,4 @@ MODEL_INIT_TEMP   = f'./template/__init__.template'
 MODEL_README_TEMP = './template/README.md.template'
 
 # 导包路径
-IMPORT_INIT_PATH = f'from {'.'.join(MODEL_OUTDIR.split('/')[2:5])}.'   # app.model.dbs
+IMPORT_INIT_PATH = f'from {".".join(MODEL_OUTDIR.split("/")[2:5])}.'   # app.model.dbs
