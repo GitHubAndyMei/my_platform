@@ -1,16 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 
-import sys
 import os
-import getopt
-import copy
 from mako.template import Template
 from template_param import *
-
 from config import DATABASE, MODEL_OUTDIR, MODEL_TEMP, MODEL_INIT_TEMP, MODEL_README_TEMP
 from table import *
-
 
 def gen_code(table_name):
     table_info_tuple = Table.show_table(table_name)
