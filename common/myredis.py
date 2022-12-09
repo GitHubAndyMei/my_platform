@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-redis api module
+redis module
 """
+
 import sys
 sys.path.append("..")
 

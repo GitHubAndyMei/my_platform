@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+log module
+"""
+
 import logging
 from config import LOG_PATH
 

@@ -1,3 +1,7 @@
+"""
+exception modul
+"""
+
 from common.result_code import CustomStatus
 
 class CtException(Exception):
