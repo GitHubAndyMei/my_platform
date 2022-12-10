@@ -4,10 +4,12 @@ exception modul
 
 from common.result_code import CustomStatus
 
+
 class CtException(Exception):
     '''
     @brief ct异常类,所有异常类需要继承此类
     '''
+
     def __init__(self, status: CustomStatus, message=""):
         super().__init__()
         self.code = status.code

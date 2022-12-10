@@ -91,3 +91,13 @@ class Demo:
             param(name="age",  type="int",    min="0", max="9999", comment=u"年龄")
         )
     )
+    API(
+        api(method="post", url="/api/v1/login", comment="登录"),
+        request(
+            param(name="username", type="string", min="1", max="32", comment=u"用户名"),
+            param(name="password", type="string", min="1", max="32", comment=u"密码")
+        ),
+        response(
+            param(name="jwt", type="string", min="1", max="32", comment=u"jwt"),
+        )
+    )

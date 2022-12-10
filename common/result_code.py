@@ -10,3 +10,5 @@ class CustomStatus:
 SUCCESS            = CustomStatus(200,   "success")
 ERR_SYSTEM_BUSY    = CustomStatus(5000,  "the system is Busy, please try later")
 ERR_PARAM          = CustomStatus(5001,  "param error")
+ERR_USER_NOT_FOUND = CustomStatus(5002,  "user not found")
+ERR_PASSWORD = CustomStatus(5003,  "password is error")

@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from config import CONF
 
 def create_db_url():
-    username = CONF.get('mysql').get('user')
+    username = CONF.get('mysql').get('account')
     password = CONF.get('mysql').get('password', '')
     db       = CONF.get('mysql').get('db')
     host     = CONF.get('mysql').get('host')
@@ -19,6 +19,7 @@ def create_db_url():
     db_url = url.update_query_dict({ 'charset': 'utf8mb4', 'autocommit': 'true'})
 
     return db_url
+
 
 def create_session():
     # 初始化数据库连接:

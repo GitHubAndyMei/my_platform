@@ -12,6 +12,8 @@ from external.protocol.python.alter_demo_request import AlterDemoRequest
 from external.protocol.python.alter_demo_response import AlterDemoResponse
 from external.protocol.python.delete_demo_request import DeleteDemoRequest
 from external.protocol.python.delete_demo_response import DeleteDemoResponse
+from external.protocol.python.login_request import LoginRequest
+from external.protocol.python.login_response import LoginResponse
 from external.protocol.python.query_demo_request import QueryDemoRequest
 from external.protocol.python.query_demo_response import QueryDemoResponse
 from external.protocol.python.query_demos_request import QueryDemosRequest
@@ -70,5 +72,16 @@ class DeleteDemoView(BaseView):
 	response_protocol = DeleteDemoResponse
 	view_func = {
 		"post": DemoService.delete_demo
+	}
+
+
+class LoginView(BaseView):
+	decorators = ()     # 前置接口
+	
+	methods = ["POST"]  # 允许的请求方式
+	request_protocol  = LoginRequest
+	response_protocol = LoginResponse
+	view_func = {
+		"post": DemoService.login
 	}
 

@@ -1,6 +1,6 @@
 mysql:
   host: 127.0.0.1
-  port: 3306
+  port: 14006
   user: momenta
   password: momenta
   db: ct_db
@@ -17,3 +17,4 @@ redis:
 jwt:
   key: d41d8cd98f00b204e9800998ecf8427e
   ex: 60
+  algorithm: HS256

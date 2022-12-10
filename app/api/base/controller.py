@@ -19,11 +19,11 @@ class BaseView(MethodView):
     request_protocol = None  # 请求协议类
     response_protocol = None # 应答协议类
     view_func = {
-        "get":    None, # List all users or Show a single user
-        "post":   None, # Create a new user
+        "get":    None, # List all users or Show a single account
+        "post":   None, # Create a new account
         "put":    None, # 如果该更新对应的URI多次调用的结果一致，则PUT。如果每次提交相同的内容，最终结果不一致的时候，用POST
-        "delete": None, # Delete a user
-        "path":   None  # Update a user
+        "delete": None, # Delete a account
+        "path":   None  # Update a account
     }
 
     def call_view_func(self, request_dict: Dict, handler):
