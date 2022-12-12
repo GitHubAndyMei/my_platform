@@ -32,8 +32,7 @@ class ${SERVICE.name}Service(object):
 		"""
 		${api.comment}
 		"""
-		response.set_name(request.name)
-		response.set_age(request.age)
+		pass
 
 
 % endfor

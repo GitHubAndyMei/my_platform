@@ -25,8 +25,7 @@ class DemoService(object):
 		"""
 		添加demo
 		"""
-		response.set_name(request.name)
-		response.set_age(request.age)
+		pass
 
 
 	@classmethod
@@ -34,8 +33,7 @@ class DemoService(object):
 		"""
 		查询demo
 		"""
-		response.set_name(request.name)
-		response.set_age(request.age)
+		pass
 
 
 	@classmethod
@@ -43,8 +41,7 @@ class DemoService(object):
 		"""
 		查询demo列表
 		"""
-		response.set_name(request.name)
-		response.set_age(request.age)
+		pass
 
 
 	@classmethod
@@ -52,8 +49,7 @@ class DemoService(object):
 		"""
 		修改demo
 		"""
-		response.set_name(request.name)
-		response.set_age(request.age)
+		pass
 
 
 	@classmethod
@@ -61,8 +57,7 @@ class DemoService(object):
 		"""
 		删除demo
 		"""
-		response.set_name(request.name)
-		response.set_age(request.age)
+		pass
 
 
 	@classmethod
@@ -70,7 +65,6 @@ class DemoService(object):
 		"""
 		登录
 		"""
-		response.set_name(request.name)
-		response.set_age(request.age)
+		pass
 
 

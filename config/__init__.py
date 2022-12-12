@@ -9,12 +9,11 @@ from config.config import *
 
 def load_config():
     """获取配置文件"""
-    env = os.environ.get('ct_env', 'dev')
-    config_filepath = os.path.join(config.CONF_PATH, f'{env}.yml')
+    config_filepath = os.path.join(config.CONF_PATH, f'{ENV}.yml')
 
     with open(config_filepath, "r") as f:
         conf_dict = yaml.load(f.read(), Loader=yaml.SafeLoader)
-    print(f"env: {env}, config: {conf_dict}")
+    # print(f"env: {env}, config: {conf_dict}")
     return conf_dict
 
 

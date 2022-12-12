@@ -13,3 +13,4 @@ CONF_PATH = os.path.join(PROJECT_PATH, "config")
 
 DAY = 60 * 60 * 24
 JWT_EXPIRED_TIME = DAY * 30
+ENV = os.environ.get('ct_env', 'dev')

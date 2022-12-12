@@ -6,6 +6,8 @@ from flask import request, jsonify
 from common.exception import CtException
 from common.result_code import ERR_SYSTEM_BUSY, SUCCESS, CustomStatus
 from common.logger import logger
+from config import ENV
+
 
 def response(status: CustomStatus, data=None):
     result = {
@@ -15,19 +17,20 @@ def response(status: CustomStatus, data=None):
     }
     return result
 
+
 class BaseView(MethodView):
     request_protocol = None  # 请求协议类
-    response_protocol = None # 应答协议类
+    response_protocol = None  # 应答协议类
     view_func = {
-        "get":    None, # List all users or Show a single account
-        "post":   None, # Create a new account
-        "put":    None, # 如果该更新对应的URI多次调用的结果一致，则PUT。如果每次提交相同的内容，最终结果不一致的时候，用POST
-        "delete": None, # Delete a account
-        "path":   None  # Update a account
+        "get": None,  # List all users or Show a single auth
+        "post": None,  # Create a new auth
+        "put": None,  # 如果该更新对应的URI多次调用的结果一致，则PUT。如果每次提交相同的内容，最终结果不一致的时候，用POST
+        "delete": None,  # Delete a auth
+        "path": None  # Update a auth
     }
 
     def call_view_func(self, request_dict: Dict, handler):
-        request_obj  = self.request_protocol()
+        request_obj = self.request_protocol()
         response_obj = self.response_protocol()
         if callable(handler):
             try:
@@ -38,8 +41,12 @@ class BaseView(MethodView):
                 logger.error(e)
                 return jsonify(response(CustomStatus(e.code, e.message)))
             except Exception as e:
+                print(ENV)
+                if not ENV or ENV == 'dev':
+                    raise e
                 logger.error(traceback.format_exc())
                 logger.error(f"系统异常:{e}")
+                print(e)
                 return jsonify(response(ERR_SYSTEM_BUSY))
         else:
             return jsonify(response(ERR_SYSTEM_BUSY))
