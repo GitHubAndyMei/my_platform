@@ -10,14 +10,14 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from config import CONF
 
 def create_db_url():
-    username = CONF.get('mysql').get('auth')
+    username = CONF.get('mysql').get('user')
     password = CONF.get('mysql').get('password', '')
     db       = CONF.get('mysql').get('db')
     host     = CONF.get('mysql').get('host')
     port     = CONF.get('mysql').get('port')
     url      = make_url(f'mysql+pymysql://{username}:{password}@{host}:{port}/{db}')
     db_url = url.update_query_dict({ 'charset': 'utf8mb4', 'autocommit': 'true'})
-
+    print("db_url",db_url)
     return db_url
 
 

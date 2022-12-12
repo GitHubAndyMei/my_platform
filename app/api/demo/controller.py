@@ -79,7 +79,7 @@ class LoginView(BaseView):
 	decorators = ()     # 前置接口
 	
 	methods = ["POST"]  # 允许的请求方式
-	request_protocol  = LoginRequest
+	request_protocol = LoginRequest
 	response_protocol = LoginResponse
 	view_func = {
 		"post": DemoService.login

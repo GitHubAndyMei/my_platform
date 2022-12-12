@@ -35,4 +35,5 @@ class AccountService(object):
         jwt = encode_jwt({
             "user_name": user.username
         }, user_id=user.id)
+        print(jwt)
         response.set_jwt(jwt)
