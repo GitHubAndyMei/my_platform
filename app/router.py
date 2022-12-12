@@ -11,6 +11,7 @@ from app.api.demo.controller import QueryDemosView
 from app.api.demo.controller import AlterDemoView
 from app.api.demo.controller import DeleteDemoView
 from app.api.auth.controller import LoginView
+from app.api.auth.controller import RegisterView
 
 router = Blueprint('api', __name__)
 
@@ -21,6 +22,7 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/demo/query_demos', view_func = QueryDemosView.as_view('query_demos')) # 3.查询demo列表
 	router.add_url_rule('/api/v1/demo/alter_demo', view_func = AlterDemoView.as_view('alter_demo')) # 4.修改demo
 	router.add_url_rule('/api/v1/demo/delete_demo', view_func = DeleteDemoView.as_view('delete_demo')) # 5.删除demo
-	router.add_url_rule('/api/v1/login', view_func=LoginView.as_view('login')) # 6.登录
+	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 6.登录
+	router.add_url_rule('/api/v1/register', view_func = RegisterView.as_view('register')) # 7.注册
 
 	app.register_blueprint(router)

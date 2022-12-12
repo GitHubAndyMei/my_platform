@@ -101,3 +101,12 @@ class Demo:
             param(name="jwt", type="string", min="1", max="32", comment=u"jwt"),
         )
     )
+    API(
+        api(method="post", url="/api/v1/register", comment="注册"),
+        request(
+            param(name="username", type="string", min="1", max="32", comment=u"用户名"),
+            param(name="password", type="string", min="1", max="32", comment=u"密码")
+        ),
+        response(
+        )
+    )

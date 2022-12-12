@@ -15,6 +15,8 @@ from external.protocol.python.query_demo_request import QueryDemoRequest
 from external.protocol.python.query_demo_response import QueryDemoResponse
 from external.protocol.python.query_demos_request import QueryDemosRequest
 from external.protocol.python.query_demos_response import QueryDemosResponse
+from external.protocol.python.register_request import RegisterRequest
+from external.protocol.python.register_response import RegisterResponse
 
 class DemoService(object):
 	"""
@@ -64,6 +66,14 @@ class DemoService(object):
 	def login(cls, request: LoginRequest, response: LoginResponse):
 		"""
 		登录
+		"""
+		pass
+
+
+	@classmethod
+	def register(cls, request: RegisterRequest, response: RegisterResponse):
+		"""
+		注册
 		"""
 		pass
 

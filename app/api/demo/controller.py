@@ -18,6 +18,8 @@ from external.protocol.python.query_demo_request import QueryDemoRequest
 from external.protocol.python.query_demo_response import QueryDemoResponse
 from external.protocol.python.query_demos_request import QueryDemosRequest
 from external.protocol.python.query_demos_response import QueryDemosResponse
+from external.protocol.python.register_request import RegisterRequest
+from external.protocol.python.register_response import RegisterResponse
 
 
 class AddDemoView(BaseView):
@@ -79,9 +81,20 @@ class LoginView(BaseView):
 	decorators = ()     # 前置接口
 	
 	methods = ["POST"]  # 允许的请求方式
-	request_protocol = LoginRequest
+	request_protocol  = LoginRequest
 	response_protocol = LoginResponse
 	view_func = {
 		"post": DemoService.login
+	}
+
+
+class RegisterView(BaseView):
+	decorators = ()     # 前置接口
+	
+	methods = ["POST"]  # 允许的请求方式
+	request_protocol  = RegisterRequest
+	response_protocol = RegisterResponse
+	view_func = {
+		"post": DemoService.register
 	}
 

@@ -53,7 +53,7 @@ if __name__ == '__main__':
     module = __import__(idl_file_name.split(".")[0])
 
     ParserPython.parse()
-    out_file = "../../app/router.py"
+    out_file = "../../app/router_demo.py"
     with open(out_file, 'wb+') as f:
         template = Template(filename='./template/router.py.template', input_encoding='UTF-8')
         f.write(template.render(SERVICE_DICT=G_SERVICE_DEFINE_DICT).encode("UTF-8"))
