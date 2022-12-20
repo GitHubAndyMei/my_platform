@@ -13,7 +13,7 @@ logger.setLevel(logging.INFO)
 if not os.path.exists(f"{LOG_PATH}"):
     os.mkdir(LOG_PATH)
 
-handler = logging.FileHandler(f"{LOG_PATH}/${PROJECT_NAME}.log")
+handler = logging.FileHandler(f"{LOG_PATH}/{PROJECT_NAME}.log")
 handler.setFormatter(logging.Formatter("%(asctime)s|%(levelname)s|%(filename)s %(funcName)s %(lineno)s|%(message)s"))
 
 logger.addHandler(handler)
