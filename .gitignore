@@ -1,2 +1,6 @@
 *.log
 __pycache__/
+
+# idea 忽略文件
+.idea/
+.vscode/
