@@ -13,22 +13,23 @@ from external.protocol.python.register_response import RegisterResponse
 
 
 class LoginView(BaseView):
-    decorators = ()  # 前置接口
-
-    methods = ["POST"]  # 允许的请求方式
-    request_protocol = LoginRequest
-    response_protocol = LoginResponse
-    view_func = {
-        "post": AuthService.login
-    }
+	decorators = ()     # 前置接口
+	
+	methods = ["POST"]  # 允许的请求方式
+	request_protocol  = LoginRequest
+	response_protocol = LoginResponse
+	view_func = {
+		"post": AuthService.login
+	}
 
 
 class RegisterView(BaseView):
-    decorators = ()  # 前置接口
+	decorators = ()     # 前置接口
+	
+	methods = ["POST"]  # 允许的请求方式
+	request_protocol  = RegisterRequest
+	response_protocol = RegisterResponse
+	view_func = {
+		"post": AuthService.register
+	}
 
-    methods = ["POST"]  # 允许的请求方式
-    request_protocol = RegisterRequest
-    response_protocol = RegisterResponse
-    view_func = {
-        "post": AuthService.register
-    }

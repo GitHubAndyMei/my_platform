@@ -91,6 +91,9 @@ class Demo:
             param(name="age",  type="int",    min="0", max="9999", comment=u"年龄")
         )
     )
+
+class Auth:
+    service(comment="授权服务", owner="施意波")
     API(
         api(method="post", url="/api/v1/login", comment="登录"),
         request(

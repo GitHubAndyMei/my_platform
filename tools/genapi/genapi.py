@@ -53,7 +53,7 @@ if __name__ == '__main__':
     module = __import__(idl_file_name.split(".")[0])
 
     ParserPython.parse()
-    out_file = "../../app/router_demo.py"
+    out_file = "../../app/router.py"
     with open(out_file, 'wb+') as f:
         template = Template(filename='./template/router.py.template', input_encoding='UTF-8')
         f.write(template.render(SERVICE_DICT=G_SERVICE_DEFINE_DICT).encode("UTF-8"))
@@ -73,7 +73,7 @@ if __name__ == '__main__':
             f.write(template.render(SERVICE=service).encode("UTF-8"))
         print(f"视图文件生成完毕: {out_file}")
 
-        out_file = os.path.join("../../app/api", f'{service.name.lower()}/service.py')
+        out_file = os.path.join("../../app/api", f'{service.name.lower()}/service_demo.py')
         with open(out_file, 'wb+') as f:
             template = Template(filename='./template/service.py.template', input_encoding='UTF-8')
             f.write(template.render(SERVICE=service).encode("UTF-8"))

@@ -1,7 +1,7 @@
 mysql:
   host: 127.0.0.1
-  port: 14006
-  user: momenta
+  port: 13306
+  username: momenta
   password: momenta
   db: ct_db
   autocommit: true

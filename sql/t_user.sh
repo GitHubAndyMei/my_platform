@@ -1,4 +1,3 @@
-#!/bin/bash
 #db config
 set encoding=utf-8
 
@@ -10,7 +9,7 @@ done < ./config.sh
 table_sum=1
 table_base_name="t_user"
 
-mycmd="mysql -h$host -u$user -p$password -P$port --default-character-set=utf8mb4"
+mycmd="mysql -h$host -u$username -p$password -P$port --default-character-set=utf8mb4"
 for i in `seq 1 $table_sum`;
 do
 table_index=`expr $i - 1`
