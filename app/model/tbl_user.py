@@ -8,17 +8,17 @@ from app.model.base import Base
 from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text
 
 class EnumTblUserDeleted(enum.Enum):
-    DELETED_NO = '0' # 否
-    DELETED_YES = '1' # 是
+    DELETED_NO = 0 # 否
+    DELETED_YES = 1 # 是
 
     @classmethod
-    def get_desc(cls, enum_value: str):
+    def get_desc(cls, enum_value: int):
         '''
         获取删除标记 值描述
         '''
         desc_dict = {
-            '0':'否',
-            '1':'是',
+            0:'否',
+            1:'是',
         }
 
         return desc_dict.get(enum_value, '未知状态')
