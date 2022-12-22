@@ -4,7 +4,14 @@
 import os
 from mako.template import Template
 from template_param import *
-from config import DATABASE, MODEL_OUTDIR, MODEL_TEMP, MODEL_INIT_TEMP, MODEL_README_TEMP
+from config import (
+    DATABASE,
+    MODEL_OUTDIR,
+    MODEL_TEMP,
+    MODEL_INIT_TEMP,
+    MODEL_README_TEMP,
+    MODEL_DTO_TEMP
+)
 from table import *
 
 def gen_code(table_name):
@@ -22,6 +29,15 @@ def gen_code(table_name):
         table = Table(table_info)
         fp = open(os.path.join(MODEL_OUTDIR, f'tbl_{table.name[2:]}.py'), 'wb+')
         template = Template(filename=MODEL_TEMP, input_encoding='UTF-8')
+        fp.write(template.render(TABLE=table).encode("utf-8"))
+        fp.close()
+        del template
+
+    # 生成dto文件
+    for table_info in table_info_tuple:
+        table = Table(table_info)
+        fp = open(os.path.join(MODEL_OUTDIR, f'tbl_{table.name[2:]}_dto.py'), 'wb+')
+        template = Template(filename=MODEL_DTO_TEMP, input_encoding='UTF-8')
         fp.write(template.render(TABLE=table).encode("utf-8"))
         fp.close()
         del template

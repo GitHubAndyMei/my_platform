@@ -38,3 +38,19 @@ def create_session():
     return session
 
 mydb = create_session()
+
+if __name__ == '__main__':
+    from app.model.tbl_user import TblUser
+    # user = TblUser(username="yingji",password="123456",operator="admin")
+    # mydb.add(user)
+    # mydb.commit()
+    # user = mydb.query(TblUser).filter(TblUser.username == 'yingji').first()
+    user_all = mydb.query(TblUser).all()
+    for user in user_all:
+        print(user.id)
+        print(user.username)
+        print(user.password)
+        print(user.deleted)
+        print(user.operator)
+        print(user.create_time)
+        print(user.modify_time)
