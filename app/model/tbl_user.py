@@ -5,7 +5,7 @@ table t_user data model.
 
 import enum
 from app.model.base import Base
-from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text
+from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text, UniqueConstraint
 
 class EnumTblUserDeleted(enum.Enum):
     DELETED_NO = 0 # 否
@@ -47,9 +47,12 @@ class TblUser(Base):
 
     # 所有可更新的字段
     UP_COLUMNS = [
-        'username',
         'password',
         'deleted',
         'operator',
         'modify_time',
     ]
+
+    __table_args__ = (
+        UniqueConstraint('F_username',name='username_index'),
+    )

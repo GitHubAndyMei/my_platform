@@ -31,7 +31,7 @@ class Table(object):
         self.index_dict = {} #  {"key_name":["DbIndex"]}
         _unique_index = self.ShowUniqueIndexFromDB(self.name)
         for index in _unique_index:
-            if index[2] == 'F_org_code':
+            if index[2] != 'PRIMARY' and index[1] == 0:
                 self.unique_index.append(index[4].replace('F_', ''))
 
             # 初始化index_dict

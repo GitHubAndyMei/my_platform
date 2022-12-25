@@ -1,12 +1,12 @@
 <%
 import re
 from template_param import get_camel_style_name
-CLASS_NAME = 'tbl_' + TABLE.name.lstrip('t_') + 'Dto'#类名
-CLASS_NAME = get_camel_style_name(CLASS_NAME) # 将类名转换成驼峰
+class_name = 'tbl_' + TABLE.name.lstrip('t_') + 'Dto'#类名
+class_name = get_camel_style_name(class_name) # 将类名转换成驼峰
 %>
 # -*- coding: utf-8 -*-
 
-class ${CLASS_NAME}:
+class ${class_name}:
     '''
     ${TABLE.comment}
     '''
@@ -14,7 +14,6 @@ class ${CLASS_NAME}:
 %for field in TABLE.fields:
 <%
     var_name = field.name.lstrip("F_")
-    print(var_name)
 %>\
         self._${var_name} = None  # ${field.comment}
         self._${var_name}_u = 0

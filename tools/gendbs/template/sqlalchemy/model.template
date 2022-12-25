@@ -2,6 +2,7 @@
 import re
 from template_param import get_camel_style_name
 CLASS_NAME = 'tbl_' + TABLE.name.lstrip('t_') #类名
+UNIQUE_INDEX = TABLE.unique_index
 %>
 """
 table ${TABLE.name} data model.
@@ -9,7 +10,7 @@ table ${TABLE.name} data model.
 
 import enum
 from app.model.base import Base
-from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text
+from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text, UniqueConstraint
 
 <%
     # 生成字段的枚举类
@@ -116,3 +117,9 @@ class ${get_camel_style_name(CLASS_NAME)}(Base):
 %endif
 % endfor
     ]
+
+    __table_args__ = (
+    %for uni_col in UNIQUE_INDEX:
+        UniqueConstraint('F_${uni_col}',name='${uni_col}_index'),
+    % endfor
+    )

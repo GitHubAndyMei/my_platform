@@ -10,9 +10,10 @@ from config import (
     MODEL_TEMP,
     MODEL_INIT_TEMP,
     MODEL_README_TEMP,
-    MODEL_DTO_TEMP
+    MODEL_DTO_TEMP,
 )
 from table import *
+
 
 def gen_code(table_name):
     table_info_tuple = Table.show_table(table_name)
@@ -43,7 +44,7 @@ def gen_code(table_name):
         del template
 
     table_list = []
-    table_name_sorted_list = sorted([table_name for table_name in table_info_tuple],key=lambda i: i)
+    table_name_sorted_list = sorted([table_name for table_name in table_info_tuple], key=lambda i: i)
     for table_info in table_name_sorted_list:
         table_list.append(Table(table_info))
 
@@ -53,6 +54,7 @@ def gen_code(table_name):
     fp.write(template.render(TABLES=table_list).encode("utf-8"))
     fp.close()
     del template
+
 
 if __name__ == '__main__':
     gen_code(DATABASE)
