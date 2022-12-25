@@ -4,7 +4,7 @@
 from flask import Flask
 
 from app.router import route_register
-from config import PROJECT_NAME
+from config.config import PROJECT_NAME
 
 if __name__ == '__main__':
     app = Flask(PROJECT_NAME)

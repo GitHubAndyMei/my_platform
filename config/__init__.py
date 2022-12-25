@@ -4,12 +4,13 @@ project config module
 """
 import os
 import yaml
-from config.config import *
+from config.config import CONF_PATH
+from config.config import ENV
 
 
 def load_config():
     """获取配置文件"""
-    config_filepath = os.path.join(config.CONF_PATH, f'{ENV}.yml')
+    config_filepath = os.path.join(CONF_PATH, f'{ENV}.yml')
 
     with open(config_filepath, "r") as f:
         conf_dict = yaml.load(f.read(), Loader=yaml.SafeLoader)
