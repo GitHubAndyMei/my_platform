@@ -102,13 +102,21 @@ class ${get_camel_style_name(CLASS_NAME)}(Base):
     # 唯一索引
     __table_args__ = (
     %for index in TABLE.unique_index_dict.values():
-        UniqueConstraint(${tuple(index.column_names)}, name='${index.key_name}'),
+<%
+    join_str = "', '".join(index.column_names)
+    column_names_str = f"join_str"
+%>\
+        UniqueConstraint('${join_str}', name='${index.key_name}'),
     % endfor
     )
 
     # 普通索引
 % for index in TABLE.index_dict.values():
-    Index('${index.key_name}', ${tuple(index.column_names)})  # 普通索引
+<%
+    join_str = "', '".join(index.column_names)
+    column_names_str = f"join_str"
+%>\
+    Index('${index.key_name}', '${join_str}')  # 普通索引
 %endfor
 
     # 字段别名

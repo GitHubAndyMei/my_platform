@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from app.model.tbl_user import TblUser
 from common.mydb import mydb
 from common.exception import CtException
 from common.result_code import ERR_USER_NOT_FOUND,ERR_PASSWORD,ERR_USER_EXISTS
@@ -9,6 +8,8 @@ from external.protocol.python.login_request import LoginRequest
 from external.protocol.python.login_response import LoginResponse
 from external.protocol.python.register_request import RegisterRequest
 from external.protocol.python.register_response import RegisterResponse
+
+from app.model.tbl_user import TblUser
 
 
 class AuthService(object):

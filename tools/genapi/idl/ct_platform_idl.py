@@ -95,7 +95,7 @@ class Demo:
 class Auth:
     service(comment="授权服务", owner="施意波")
     API(
-        api(method="post", url="/api/v1/login", comment="登录"),
+        api(method="post", url="/api/v1/auth/login", comment="登录"),
         request(
             param(name="username", type="string", min="1", max="32", comment=u"用户名"),
             param(name="password", type="string", min="1", max="32", comment=u"密码")
@@ -105,7 +105,7 @@ class Auth:
         )
     )
     API(
-        api(method="post", url="/api/v1/register", comment="注册"),
+        api(method="post", url="/api/v1/auth/register", comment="注册"),
         request(
             param(name="username", type="string", min="1", max="32", comment=u"用户名"),
             param(name="password", type="string", min="1", max="32", comment=u"密码")

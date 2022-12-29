@@ -42,11 +42,11 @@ class TblUser(Base):
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint(('F_username',), name='unique_index_t_user_username'),
+        UniqueConstraint('F_username', name='unique_index_t_user_username'),
     )
 
     # 普通索引
-    Index('index_t_user_modify_time', ('F_modify_time',))  # 普通索引
+    Index('index_t_user_modify_time', 'F_modify_time')  # 普通索引
 
     # 字段别名
     ID = 'id'  # 唯一id

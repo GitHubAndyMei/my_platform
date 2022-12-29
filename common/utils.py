@@ -4,7 +4,8 @@ import time
 import hashlib
 
 # project package
-from config import CONF, JWT_EXPIRED_TIME
+from config import CONF
+from config.config import JWT_EXPIRED_TIME
 from common.myredis import MyRedis
 
 

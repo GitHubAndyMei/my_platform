@@ -60,3 +60,4 @@ def gen_code(table_name):
 
 if __name__ == '__main__':
     gen_code(DATABASE)
+    print("generate model success!")

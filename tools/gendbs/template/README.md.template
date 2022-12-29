@@ -18,7 +18,6 @@ ${HEAD} ${table_seq}.${table.comment}(${table.name})
 | - | - | - | - | - |
 	% for field in table.fields:
 <%
-	print(table.index_dict)
 	pk = ""
 	if field.is_pk:
 		pk = "Y"

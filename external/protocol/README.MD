@@ -197,7 +197,7 @@
 ### 6.接口: 登录
 **类型:  **
 
-**url: /api/v1/login **
+**url: /api/v1/auth/login **
 
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
@@ -232,7 +232,7 @@
 ### 7.接口: 注册
 **类型:  **
 
-**url: /api/v1/register **
+**url: /api/v1/auth/register **
 
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |

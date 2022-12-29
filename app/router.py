@@ -24,7 +24,7 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/demo/delete_demo', view_func = DeleteDemoView.as_view('delete_demo')) # 5.删除demo
 
 	# service: 授权服务 owner: 施意波
-	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 1.登录
-	router.add_url_rule('/api/v1/register', view_func = RegisterView.as_view('register')) # 2.注册
+	router.add_url_rule('/api/v1/auth/login', view_func = LoginView.as_view('login')) # 1.登录
+	router.add_url_rule('/api/v1/auth/register', view_func = RegisterView.as_view('register')) # 2.注册
 
 	app.register_blueprint(router)
