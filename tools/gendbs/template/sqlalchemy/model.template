@@ -2,13 +2,6 @@
 import re
 from template_param import get_camel_style_name
 CLASS_NAME = 'tbl_' + TABLE.name.lstrip('t_') #类名
-UNIQUE_INDEX = TABLE.unique_index
-global INDEX_DICT
-for key_name,db_index in TABLE.index_dict.items():
-    if db_index.name != 'PRIMARY' and db_index.unique_flag == False:
-        if len(db_index.column_name_list) == 1:
-            INDEX_DICT = {clo_name:clo_idx  for clo_name,clo_idx in zip(db_index.column_name_list,[db_index.name])}
-print(INDEX_DICT)
 %>
 """
 table ${TABLE.name} data model.
@@ -79,8 +72,10 @@ class ${get_camel_style_name(CLASS_NAME)}(Base):
     '''
     ${TABLE.comment}
     '''
+    # 表名
     __tablename__ = '${TABLE.name}'
 
+    # 字段定义
 % for field in TABLE.fields:
 <%
     FIELD_VAR_NAME = field.name.replace('F_','')
@@ -103,36 +98,38 @@ class ${get_camel_style_name(CLASS_NAME)}(Base):
     ${FIELD_VAR_NAME} = Column(String(${string_len}), name='${field.name}', comment='${field.comment}', nullable=False, default='${field.default}')
     % endif
 %endfor
-% for col_name,col_idx in INDEX_DICT.items():
-    <%
-        COL_NAME = col_name.replace('F_','')
-    %>
-    Index('${col_idx}', ${COL_NAME})  # 普通索引
+
+    # 唯一索引
+    __table_args__ = (
+    %for index in TABLE.unique_index_dict.values():
+        UniqueConstraint(${tuple(index.column_names)}, name='${index.key_name}'),
+    % endfor
+    )
+
+    # 普通索引
+% for index in TABLE.index_dict.values():
+    Index('${index.key_name}', ${tuple(index.column_names)})  # 普通索引
 %endfor
 
+    # 字段别名
 % for field in TABLE.fields:
 <%
     FIELD_NAME = field.name     # 字段名
     FIELD_VAR_NAME = FIELD_NAME.replace('F_','')
 %>\
-    ${FIELD_VAR_NAME.upper()} = '${FIELD_VAR_NAME}'  # ${field.comment} 字段别名
+    ${FIELD_VAR_NAME.upper()} = '${FIELD_VAR_NAME}'  # ${field.comment}
 % endfor
 
-    # 所有可更新的字段
+    # 可更新的字段
     UP_COLUMNS = [
 % for field in TABLE.fields:
 <%
     FIELD_NAME = field.name     # 字段名
     FIELD_VAR_NAME = FIELD_NAME.replace('F_','')
 %>\
-%if FIELD_VAR_NAME not in TABLE.unique_index and FIELD_VAR_NAME not in ['id', 'create_time']:
+%if FIELD_VAR_NAME not in TABLE.all_index_field_names and FIELD_VAR_NAME != 'create_time':
         '${FIELD_VAR_NAME}',
 %endif
 % endfor
     ]
 
-    __table_args__ = (
-    %for uni_col in UNIQUE_INDEX:
-        UniqueConstraint('F_${uni_col}', name='${uni_col}_index'),
-    % endfor
-    )

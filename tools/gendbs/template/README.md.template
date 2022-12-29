@@ -18,6 +18,7 @@ ${HEAD} ${table_seq}.${table.comment}(${table.name})
 | - | - | - | - | - |
 	% for field in table.fields:
 <%
+	print(table.index_dict)
 	pk = ""
 	if field.is_pk:
 		pk = "Y"
@@ -25,16 +26,21 @@ ${HEAD} ${table_seq}.${table.comment}(${table.name})
 | ${field.name}|${field.data_type}|${pk}|${field.comment}|${field.default}|
 	% endfor
 
-	% for node in table.index_dict.values():
+	% for index in table.unique_index_dict.values():
 <%
-		HEAD = "普通索引"
-		if node.unique_flag:
-			HEAD = "唯一索引"
-
-		column_str = ','.join( node.column_name_list )
+		HEAD = "唯一索引"
+		column_str = ','.join( index.column_names )
 %>\
 
-${HEAD}:  ${column_str}
+${HEAD}:${index.key_name}  索引字段: ${column_str}
+	% endfor
+	% for node in table.unique_index_dict.values():
+<%
+		HEAD = "普通索引"
+		column_str = ','.join( node.column_names )
+%>\
+
+${HEAD}:${index.key_name}  索引字段: ${column_str}
 	% endfor
 
 

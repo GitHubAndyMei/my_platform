@@ -35,6 +35,7 @@ def gen_code(table_name):
         del template
 
     # 生成dto文件
+    '''
     for table_info in table_info_tuple:
         table = Table(table_info)
         fp = open(os.path.join(MODEL_OUTDIR, f'tbl_{table.name[2:]}_dto.py'), 'wb+')
@@ -42,6 +43,7 @@ def gen_code(table_name):
         fp.write(template.render(TABLE=table).encode("utf-8"))
         fp.close()
         del template
+    '''
 
     table_list = []
     table_name_sorted_list = sorted([table_name for table_name in table_info_tuple], key=lambda i: i)
