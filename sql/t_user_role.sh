@@ -26,7 +26,7 @@ create table $db.$table_name (
   F_user_account        varchar(64)   COLLATE utf8mb4_unicode_ci  NOT NULL DEFAULT ''  COMMENT '用户账号',
   F_is_admin            varchar(1)    COLLATE utf8mb4_unicode_ci  NOT NULL DEFAULT ''  COMMENT '是否是管理员 enum:0,normal_user,普通用户|1,admin,管理员用户',
   F_remark              text          COLLATE utf8mb4_unicode_ci  NOT NULL             COMMENT '备注',
-  F_deleted             varchar(1)    COLLATE utf8mb4_unicode_ci  NOT NULL DEFAULT '0' COMMENT '删除标记 0-否 1-是',
+  F_deleted             varchar(1)    COLLATE utf8mb4_unicode_ci  NOT NULL DEFAULT '0' COMMENT '删除标记 enum:0,no,否#1,yes,是',
   F_operator            varchar(32)   COLLATE utf8mb4_unicode_ci  NOT NULL DEFAULT ''  COMMENT '操作员',
   F_create_time         bigint(20)                                NOT NULL DEFAULT '0' COMMENT '创建时间戳 单位秒',
   F_modify_time         bigint(20)                                NOT NULL DEFAULT '0' COMMENT '更新时间戳 单位秒',
