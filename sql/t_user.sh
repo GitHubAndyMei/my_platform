@@ -22,14 +22,15 @@ $mycmd -e "drop table if exists $db.$table_name;"
 sql="
 create table $db.$table_name (
     F_id                     int           AUTO_INCREMENT             COMMENT '唯一id',
-    F_username               varchar(64)   NOT NULL DEFAULT ''        COMMENT '用户账号',
+    F_username               varchar(64)   NOT NULL DEFAULT ''        COMMENT '用户名称',
+    F_user_account           varchar(64)   NOT NULL DEFAULT ''        COMMENT '用户账号',
     F_password               varchar(64)   NOT NULL DEFAULT ''        COMMENT '用户密码',
     F_deleted                tinyint       NOT NULL DEFAULT 0         COMMENT '删除标记 enum:0,no,否#1,yes,是',
     F_operator               varchar(64)   NOT NULL DEFAULT ''        COMMENT '操作员',
     F_create_time            bigint        NOT NULL DEFAULT 0         COMMENT '创建时间戳 单位秒',
     F_modify_time            bigint        NOT NULL DEFAULT 0         COMMENT '更新时间戳 单位秒',
     PRIMARY KEY (F_id),
-    UNIQUE KEY unique_index_${table_name}_username (F_username),
+    UNIQUE KEY (F_user_account),
     INDEX index_${table_name}_modify_time (F_modify_time)
 )ENGINE=InnoDB COMMENT '用户表';
 "
