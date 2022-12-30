@@ -9,7 +9,18 @@ table ${TABLE.name} data model.
 
 import enum
 from app.model.base import Base
-from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text, UniqueConstraint, Index
+from sqlalchemy import (
+    Column,
+    Integer,
+    Float,
+    SmallInteger,
+    BigInteger,
+    String,
+    JSON,
+    Text,
+    UniqueConstraint,
+    Index,
+    text )
 
 <%
     # 生成字段的枚举类
@@ -100,6 +111,10 @@ class ${get_camel_style_name(CLASS_NAME)}(Base):
         string_len = field.data_type.split('(')[1].replace(')', '')
 %>\
     ${FIELD_VAR_NAME} = Column(String(${string_len}), name='${field.name}', comment='${field.comment}', nullable=False, default='${field.default}')
+    % elif FIELD_BASE_TYPE == 'text':
+    ${FIELD_VAR_NAME} = Column(Text(${string_len}), name='${field.name}', comment='${field.comment}', nullable=False, default=text(''))
+    % elif FIELD_BASE_TYPE == 'float' or FIELD_BASE_TYPE == 'double':
+    ${FIELD_VAR_NAME} = Column(Float(asdecimal=True), name='${field.name}', comment='${field.comment}', nullable=False, default=${field.default})
     % endif
 %endfor
 
