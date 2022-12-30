@@ -5,7 +5,7 @@ table t_user data model.
 
 import enum
 from app.model.base import Base
-from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text, UniqueConstraint, Index
+from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text, UniqueConstraint, Index,text
 
 
 class EnumTblUserDeleted(enum.Enum):
@@ -33,7 +33,8 @@ class TblUser(Base):
 
     # 字段定义
     id = Column(Integer, name='F_id', comment='唯一id', primary_key=True, autoincrement=True)
-    username = Column(String(64), name='F_username', comment='用户账号', nullable=False, default='')
+    username = Column(String(64), name='F_username', comment='用户名称', nullable=False, default='')
+    user_account = Column(String(64), name='F_user_account', comment='用户账号', nullable=False, default='')
     password = Column(String(64), name='F_password', comment='用户密码', nullable=False, default='')
     deleted = Column(SmallInteger, name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default=0)
     operator = Column(String(64), name='F_operator', comment='操作员', nullable=False, default='')
@@ -42,7 +43,7 @@ class TblUser(Base):
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint('F_username', name='unique_index_t_user_username'),
+        UniqueConstraint('F_user_account', name='F_user_account'),
     )
 
     # 普通索引
@@ -50,7 +51,8 @@ class TblUser(Base):
 
     # 字段别名
     ID = 'id'  # 唯一id
-    USERNAME = 'username'  # 用户账号
+    USERNAME = 'username'  # 用户名称
+    USER_ACCOUNT = 'user_account'  # 用户账号
     PASSWORD = 'password'  # 用户密码
     DELETED = 'deleted'  # 删除标记 enum:0,no,否#1,yes,是
     OPERATOR = 'operator'  # 操作员
@@ -61,6 +63,7 @@ class TblUser(Base):
     UP_COLUMNS = [
         'id',
         'username',
+        'user_account',
         'password',
         'deleted',
         'operator',
