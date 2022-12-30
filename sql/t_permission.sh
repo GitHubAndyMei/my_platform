@@ -32,7 +32,7 @@ create table $db.$table_name (
   F_create_time         bigint(20)                                 NOT NULL DEFAULT '0' COMMENT '创建时间戳 单位秒',
   F_modify_time         bigint(20)                                 NOT NULL DEFAULT '0' COMMENT '更新时间戳 单位秒',
   PRIMARY KEY (F_id) USING BTREE,
-  UNIQUE KEY F_app_code (F_app_code,F_permission_code) USING BTREE,
+  UNIQUE KEY F_permission_code (F_permission_code) USING BTREE,
   INDEX index_${table_name}_modify_time (F_modify_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限表';
 "
