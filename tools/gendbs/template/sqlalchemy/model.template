@@ -22,6 +22,10 @@ from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, 
         ENUM_KEY_PRE    = FIELD_VAR_NAME.upper() # 枚举前缀
         if '#' in field.comment:
             ENUM_LIST = field.comment.split('enum:')[1].split('#')
+        elif "|" in field.comment:
+            ENUM_LIST = field.comment.split("enum:")[1].split("|")
+        else:
+            ENUM_LIST = []
         IS_INT = True if field.data_type in ['tinyint','int','bigint'] else False
 %>\
 
