@@ -5,7 +5,18 @@ table t_user_role data model.
 
 import enum
 from app.model.base import Base
-from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text, UniqueConstraint, Index,text
+from sqlalchemy import (
+    Column,
+    Integer,
+    Float,
+    SmallInteger,
+    BigInteger,
+    String,
+    JSON,
+    Text,
+    UniqueConstraint,
+    Index,
+    text )
 
 
 class EnumTblUserRoleIsAdmin(enum.Enum):
@@ -52,7 +63,7 @@ class TblUserRole(Base):
     role_code = Column(String(64), name='F_role_code', comment='组织代码', nullable=False, default='')
     user_account = Column(String(64), name='F_user_account', comment='用户账号', nullable=False, default='')
     is_admin = Column(String(1), name='F_is_admin', comment='是否是管理员 enum:0,normal_user,普通用户|1,admin,管理员用户', nullable=False, default='')
-    remark = Column(Text(1), name='F_remark', comment='备注', nullable=False, default=text(''))
+    remark = Column(Text, name='F_remark', comment='备注', nullable=False, default=text(''))
     deleted = Column(String(1), name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default='0')
     operator = Column(String(32), name='F_operator', comment='操作员', nullable=False, default='')
     create_time = Column(BigInteger, name='F_create_time', comment='创建时间戳 单位秒', nullable=False, default=0)

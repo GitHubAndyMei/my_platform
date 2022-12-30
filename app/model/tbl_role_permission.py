@@ -5,7 +5,18 @@ table t_role_permission data model.
 
 import enum
 from app.model.base import Base
-from sqlalchemy import Column, Integer, SmallInteger, BigInteger, String, JSON, Text, UniqueConstraint, Index,text
+from sqlalchemy import (
+    Column,
+    Integer,
+    Float,
+    SmallInteger,
+    BigInteger,
+    String,
+    JSON,
+    Text,
+    UniqueConstraint,
+    Index,
+    text )
 
 
 class EnumTblRolePermissionDisplayUrl(enum.Enum):

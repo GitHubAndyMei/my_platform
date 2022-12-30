@@ -112,7 +112,7 @@ class ${get_camel_style_name(CLASS_NAME)}(Base):
 %>\
     ${FIELD_VAR_NAME} = Column(String(${string_len}), name='${field.name}', comment='${field.comment}', nullable=False, default='${field.default}')
     % elif FIELD_BASE_TYPE == 'text':
-    ${FIELD_VAR_NAME} = Column(Text(${string_len}), name='${field.name}', comment='${field.comment}', nullable=False, default=text(''))
+    ${FIELD_VAR_NAME} = Column(Text, name='${field.name}', comment='${field.comment}', nullable=False, default=text(''))
     % elif FIELD_BASE_TYPE == 'float' or FIELD_BASE_TYPE == 'double':
     ${FIELD_VAR_NAME} = Column(Float(asdecimal=True), name='${field.name}', comment='${field.comment}', nullable=False, default=${field.default})
     % endif
