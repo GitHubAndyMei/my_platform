@@ -16,7 +16,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     Index,
-    text )
+    text)
 
 
 class EnumTblUserRoleIsAdmin(enum.Enum):
@@ -60,9 +60,9 @@ class TblUserRole(Base):
 
     # 字段定义
     id = Column(Integer, name='F_id', comment='', primary_key=True, autoincrement=True)
-    role_code = Column(String(64), name='F_role_code', comment='组织代码', nullable=False, default='')
     user_account = Column(String(64), name='F_user_account', comment='用户账号', nullable=False, default='')
-    is_admin = Column(String(1), name='F_is_admin', comment='是否是管理员 enum:0,normal_user,普通用户|1,admin,管理员用户', nullable=False, default='')
+    role_code = Column(String(64), name='F_role_code', comment='组织代码', nullable=False, default='')
+    is_admin = Column(String(1), name='F_is_admin', comment='是否是管理员 enum:0,normal_user,普通用户#1,admin,管理员用户', nullable=False, default='')
     remark = Column(Text, name='F_remark', comment='备注', nullable=False, default=text(''))
     deleted = Column(String(1), name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default='0')
     operator = Column(String(32), name='F_operator', comment='操作员', nullable=False, default='')
@@ -71,18 +71,17 @@ class TblUserRole(Base):
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint('F_role_code', name='F_role_code'),
+        UniqueConstraint('F_role_code', name='t_user_role_F_role_code'),
     )
 
     # 普通索引
-    Index('index_t_org_role_modify_time', 'F_modify_time')  # 普通索引
     Index('index_t_user_role_modify_time', 'F_modify_time')  # 普通索引
 
     # 字段别名
     ID = 'id'  # 
-    ROLE_CODE = 'role_code'  # 组织代码
     USER_ACCOUNT = 'user_account'  # 用户账号
-    IS_ADMIN = 'is_admin'  # 是否是管理员 enum:0,normal_user,普通用户|1,admin,管理员用户
+    ROLE_CODE = 'role_code'  # 组织代码
+    IS_ADMIN = 'is_admin'  # 是否是管理员 enum:0,normal_user,普通用户#1,admin,管理员用户
     REMARK = 'remark'  # 备注
     DELETED = 'deleted'  # 删除标记 enum:0,no,否#1,yes,是
     OPERATOR = 'operator'  # 操作员
@@ -92,8 +91,8 @@ class TblUserRole(Base):
     # 可更新的字段
     UP_COLUMNS = [
         'id',
-        'role_code',
         'user_account',
+        'role_code',
         'is_admin',
         'remark',
         'deleted',

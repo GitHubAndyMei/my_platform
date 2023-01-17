@@ -1,6 +1,6 @@
 
 """
-table t_permission data model.
+table t_role_menu data model.
 """
 
 import enum
@@ -19,7 +19,23 @@ from sqlalchemy import (
     text)
 
 
-class EnumTblPermissionDeleted(enum.Enum):
+class EnumTblRoleMenuIsShow(enum.Enum):
+    IS_SHOW_DISPLAY = '0'  # 展示路径
+    IS_SHOW_NOT_DISPLAY = '1'  # 不展示路径
+
+    @classmethod
+    def get_desc(cls, enum_value: str):
+        '''
+        获取路径是否展示 值描述
+        '''
+        desc_dict = {
+            '0': '展示路径',
+            '1': '不展示路径',
+        }
+
+        return desc_dict.get(enum_value, '未知状态')
+
+class EnumTblRoleMenuDeleted(enum.Enum):
     DELETED_NO = '0'  # 否
     DELETED_YES = '1'  # 是
 
@@ -35,20 +51,18 @@ class EnumTblPermissionDeleted(enum.Enum):
 
         return desc_dict.get(enum_value, '未知状态')
 
-class TblPermission(Base):
+class TblRoleMenu(Base):
     '''
-    权限表
+    角色权限表
     '''
     # 表名
-    __tablename__ = 't_permission'
+    __tablename__ = 't_role_menu'
 
     # 字段定义
     id = Column(Integer, name='F_id', comment='', primary_key=True, autoincrement=True)
-    permission_code = Column(String(64), name='F_permission_code', comment='权限代码', nullable=False, default='')
-    permission_name = Column(String(64), name='F_permission_name', comment='权限名称', nullable=False, default='')
-    parent_per_code = Column(String(64), name='F_parent_per_code', comment='父权限代码', nullable=False, default='')
-    url = Column(String(128), name='F_url', comment='路径地址', nullable=False, default='')
-    sort = Column(Integer, name='F_sort', comment='排序位置，默认最后一个', nullable=False, default=999)
+    role_code = Column(String(64), name='F_role_code', comment='角色代码', nullable=False, default='')
+    menu_code = Column(String(64), name='F_menu_code', comment='菜单代码', nullable=False, default='')
+    is_show = Column(SmallInteger, name='F_is_show', comment='路径是否展示 enum:0,display,展示路径#1,not_display,不展示路径', nullable=False, default=0)
     deleted = Column(SmallInteger, name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default=0)
     operator = Column(String(32), name='F_operator', comment='操作员', nullable=False, default='')
     create_time = Column(BigInteger, name='F_create_time', comment='创建时间戳 单位秒', nullable=False, default=0)
@@ -56,19 +70,17 @@ class TblPermission(Base):
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint('F_permission_code', name='t_permission_F_permission_code'),
+        UniqueConstraint('F_role_code', name='t_role_menu_F_role_code_idx'),
     )
 
     # 普通索引
-    Index('index_t_permission_modify_time', 'F_modify_time')  # 普通索引
+    Index('index_t_role_menu_modify_time', 'F_modify_time')  # 普通索引
 
     # 字段别名
     ID = 'id'  # 
-    PERMISSION_CODE = 'permission_code'  # 权限代码
-    PERMISSION_NAME = 'permission_name'  # 权限名称
-    PARENT_PER_CODE = 'parent_per_code'  # 父权限代码
-    URL = 'url'  # 路径地址
-    SORT = 'sort'  # 排序位置，默认最后一个
+    ROLE_CODE = 'role_code'  # 角色代码
+    MENU_CODE = 'menu_code'  # 菜单代码
+    IS_SHOW = 'is_show'  # 路径是否展示 enum:0,display,展示路径#1,not_display,不展示路径
     DELETED = 'deleted'  # 删除标记 enum:0,no,否#1,yes,是
     OPERATOR = 'operator'  # 操作员
     CREATE_TIME = 'create_time'  # 创建时间戳 单位秒
@@ -77,11 +89,9 @@ class TblPermission(Base):
     # 可更新的字段
     UP_COLUMNS = [
         'id',
-        'permission_code',
-        'permission_name',
-        'parent_per_code',
-        'url',
-        'sort',
+        'role_code',
+        'menu_code',
+        'is_show',
         'deleted',
         'operator',
         'modify_time',

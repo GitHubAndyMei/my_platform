@@ -16,12 +16,12 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     Index,
-    text )
+    text)
 
 
-class EnumTblRolePermissionDisplayUrl(enum.Enum):
-    DISPLAY_URL_DISPLAY = '0'  # 展示路径
-    DISPLAY_URL_NOT_DISPLAY = '1'  # 不展示路径
+class EnumTblRolePermissionIsShow(enum.Enum):
+    IS_SHOW_DISPLAY = '0'  # 展示路径
+    IS_SHOW_NOT_DISPLAY = '1'  # 不展示路径
 
     @classmethod
     def get_desc(cls, enum_value: str):
@@ -31,6 +31,22 @@ class EnumTblRolePermissionDisplayUrl(enum.Enum):
         desc_dict = {
             '0': '展示路径',
             '1': '不展示路径',
+        }
+
+        return desc_dict.get(enum_value, '未知状态')
+
+class EnumTblRolePermissionDeleted(enum.Enum):
+    DELETED_NO = '0'  # 否
+    DELETED_YES = '1'  # 是
+
+    @classmethod
+    def get_desc(cls, enum_value: str):
+        '''
+        获取删除标记 值描述
+        '''
+        desc_dict = {
+            '0': '否',
+            '1': '是',
         }
 
         return desc_dict.get(enum_value, '未知状态')
@@ -46,15 +62,15 @@ class TblRolePermission(Base):
     id = Column(Integer, name='F_id', comment='', primary_key=True, autoincrement=True)
     role_code = Column(String(64), name='F_role_code', comment='角色代码', nullable=False, default='')
     permission_code = Column(String(64), name='F_permission_code', comment='权限代码', nullable=False, default='')
-    display_url = Column(String(1), name='F_display_url', comment='路径是否展示 enum:0,display,展示路径|1,not_display,不展示路径', nullable=False, default='')
-    deleted = Column(String(1), name='F_deleted', comment='删除标记 0-否 1-是', nullable=False, default='0')
+    is_show = Column(SmallInteger, name='F_is_show', comment='路径是否展示 enum:0,display,展示路径#1,not_display,不展示路径', nullable=False, default=0)
+    deleted = Column(SmallInteger, name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default=0)
     operator = Column(String(32), name='F_operator', comment='操作员', nullable=False, default='')
     create_time = Column(BigInteger, name='F_create_time', comment='创建时间戳 单位秒', nullable=False, default=0)
     modify_time = Column(BigInteger, name='F_modify_time', comment='更新时间戳 单位秒', nullable=False, default=0)
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint('F_role_code', name='F_role_code'),
+        UniqueConstraint('F_role_code', name='t_role_permission_F_role_code'),
     )
 
     # 普通索引
@@ -64,8 +80,8 @@ class TblRolePermission(Base):
     ID = 'id'  # 
     ROLE_CODE = 'role_code'  # 角色代码
     PERMISSION_CODE = 'permission_code'  # 权限代码
-    DISPLAY_URL = 'display_url'  # 路径是否展示 enum:0,display,展示路径|1,not_display,不展示路径
-    DELETED = 'deleted'  # 删除标记 0-否 1-是
+    IS_SHOW = 'is_show'  # 路径是否展示 enum:0,display,展示路径#1,not_display,不展示路径
+    DELETED = 'deleted'  # 删除标记 enum:0,no,否#1,yes,是
     OPERATOR = 'operator'  # 操作员
     CREATE_TIME = 'create_time'  # 创建时间戳 单位秒
     MODIFY_TIME = 'modify_time'  # 更新时间戳 单位秒
@@ -75,7 +91,7 @@ class TblRolePermission(Base):
         'id',
         'role_code',
         'permission_code',
-        'display_url',
+        'is_show',
         'deleted',
         'operator',
         'modify_time',

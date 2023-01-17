@@ -16,8 +16,56 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     Index,
-    text )
+    text)
 
+
+class EnumTblMenuParent(enum.Enum):
+    PARENT_NO = '0'  # 否
+    PARENT_YES = '1'  # 是
+
+    @classmethod
+    def get_desc(cls, enum_value: str):
+        '''
+        获取父级菜单 值描述
+        '''
+        desc_dict = {
+            '0': '否',
+            '1': '是',
+        }
+
+        return desc_dict.get(enum_value, '未知状态')
+
+class EnumTblMenuIsLink(enum.Enum):
+    IS_LINK_NO = '0'  # 否
+    IS_LINK_YES = '1'  # 是
+
+    @classmethod
+    def get_desc(cls, enum_value: str):
+        '''
+        获取是否外链 值描述
+        '''
+        desc_dict = {
+            '0': '否',
+            '1': '是',
+        }
+
+        return desc_dict.get(enum_value, '未知状态')
+
+class EnumTblMenuDeleted(enum.Enum):
+    DELETED_NO = '0'  # 否
+    DELETED_YES = '1'  # 是
+
+    @classmethod
+    def get_desc(cls, enum_value: str):
+        '''
+        获取删除标记 值描述
+        '''
+        desc_dict = {
+            '0': '否',
+            '1': '是',
+        }
+
+        return desc_dict.get(enum_value, '未知状态')
 
 class TblMenu(Base):
     '''
@@ -32,16 +80,16 @@ class TblMenu(Base):
     menu_name = Column(String(64), name='F_menu_name', comment='菜单名称', nullable=False, default='')
     icon = Column(String(64), name='F_icon', comment='菜单图标', nullable=False, default='')
     sort = Column(Integer, name='F_sort', comment='排序位置，默认最后一个', nullable=False, default=999)
-    parent = Column(String(64), name='F_parent', comment='父级菜单 0-否 1-是', nullable=False, default='0')
-    is_link = Column(String(1), name='F_is_link', comment='是否外链 0-否 1-是', nullable=False, default='0')
-    deleted = Column(String(1), name='F_deleted', comment='删除标记 0-否 1-是', nullable=False, default='0')
+    parent = Column(String(64), name='F_parent', comment='父级菜单 enum:0,no,否#1,yes,是', nullable=False, default='0')
+    is_link = Column(SmallInteger, name='F_is_link', comment='是否外链 enum:0,no,否#1,yes,是', nullable=False, default=0)
+    deleted = Column(SmallInteger, name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default=0)
     operator = Column(String(32), name='F_operator', comment='操作员', nullable=False, default='')
     create_time = Column(BigInteger, name='F_create_time', comment='创建时间戳 单位秒', nullable=False, default=0)
     modify_time = Column(BigInteger, name='F_modify_time', comment='更新时间戳 单位秒', nullable=False, default=0)
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint('F_menu_code', name='F_menu_code'),
+        UniqueConstraint('F_menu_code', name='t_menu_F_menu_code'),
     )
 
     # 普通索引
@@ -53,9 +101,9 @@ class TblMenu(Base):
     MENU_NAME = 'menu_name'  # 菜单名称
     ICON = 'icon'  # 菜单图标
     SORT = 'sort'  # 排序位置，默认最后一个
-    PARENT = 'parent'  # 父级菜单 0-否 1-是
-    IS_LINK = 'is_link'  # 是否外链 0-否 1-是
-    DELETED = 'deleted'  # 删除标记 0-否 1-是
+    PARENT = 'parent'  # 父级菜单 enum:0,no,否#1,yes,是
+    IS_LINK = 'is_link'  # 是否外链 enum:0,no,否#1,yes,是
+    DELETED = 'deleted'  # 删除标记 enum:0,no,否#1,yes,是
     OPERATOR = 'operator'  # 操作员
     CREATE_TIME = 'create_time'  # 创建时间戳 单位秒
     MODIFY_TIME = 'modify_time'  # 更新时间戳 单位秒

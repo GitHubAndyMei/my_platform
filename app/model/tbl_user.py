@@ -16,21 +16,21 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     Index,
-    text )
+    text)
 
 
 class EnumTblUserDeleted(enum.Enum):
-    DELETED_NO = 0  # 否
-    DELETED_YES = 1  # 是
+    DELETED_NO = '0'  # 否
+    DELETED_YES = '1'  # 是
 
     @classmethod
-    def get_desc(cls, enum_value: int):
+    def get_desc(cls, enum_value: str):
         '''
         获取删除标记 值描述
         '''
         desc_dict = {
-            0: '否',
-            1: '是',
+            '0': '否',
+            '1': '是',
         }
 
         return desc_dict.get(enum_value, '未知状态')
@@ -54,7 +54,7 @@ class TblUser(Base):
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint('F_user_account', name='F_user_account'),
+        UniqueConstraint('F_user_account', name='t_user_F_user_account'),
     )
 
     # 普通索引
