@@ -8,14 +8,14 @@ from external.protocol.python.login_response import LoginResponse
 from external.protocol.python.register_request import RegisterRequest
 from external.protocol.python.register_response import RegisterResponse
 
-class AuthService(object):
+class RBACService(object):
 	"""
-	认证服务
+	权限服务
 	"""
 	@classmethod
 	def login(cls, request: LoginRequest, response: LoginResponse):
 		"""
-		登录
+		角色创建
 		"""
 		pass
 
@@ -23,7 +23,7 @@ class AuthService(object):
 	@classmethod
 	def register(cls, request: RegisterRequest, response: RegisterResponse):
 		"""
-		注册
+		权限创建
 		"""
 		pass
 

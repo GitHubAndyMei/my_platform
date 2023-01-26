@@ -67,7 +67,12 @@ if __name__ == '__main__':
         print(f"数据文件生成完毕: {out_file}")
 
     for import_name, service in G_SERVICE_DEFINE_DICT.items():
-        out_file = os.path.join("../../app/api", f'{service.name.lower()}/controller.py')
+        # 检查服务的文件夹是否存在
+        out_dir = os.path.join("../../app/api", f'{service.name.lower()}')
+        out_file = os.path.join(out_dir, f'controller.py')
+        if not os.path.exists(out_dir):
+            os.mkdir(out_dir)
+
         with open(out_file, 'wb+') as f:
             template = Template(filename='./template/controller.py.template', input_encoding='UTF-8')
             f.write(template.render(SERVICE=service).encode("UTF-8"))

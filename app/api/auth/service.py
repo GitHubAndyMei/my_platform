@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from app.model.tbl_user.tbl_user import TblUser
 from common.mydb import mydb
 from common.exception import CtException
 from common.result_code import ERR_USER_NOT_FOUND,ERR_PASSWORD,ERR_USER_EXISTS
@@ -51,7 +52,7 @@ class AuthService(object):
             raise CtException(ERR_USER_EXISTS)
 
         # 将请求赋值给model对象
-        user = TblUser()
+        tbl_user = TblUser()
 
         # 哈希密码
         password = hash_password(request.password)

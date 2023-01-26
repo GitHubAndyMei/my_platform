@@ -34,68 +34,102 @@ Note:
     2.建议使用query-查询 add-增加 alter-修改 drop-删除, 其他功能请使用自定义动词
 '''
 
+
 class Demo:
     service(comment="示例服务", owner="andy.mei@momenta.ai")
     API(
         api(method="post", url="/api/v1/demo/add_demo", comment="添加demo"),
         request(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="200",  comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="200", comment=u"年龄")
         ),
         response(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="9999", comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
         )
     )
     API(
         api(method="get", url="/api/v1/demo/query_demo", comment="查询demo"),
         request(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="string", min="0", max="200",  comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="string", min="0", max="200", comment=u"年龄")
         ),
         response(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="string", min="0", max="9999", comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="string", min="0", max="9999", comment=u"年龄")
         )
     )
     API(
         api(method="post", url="/api/v1/demo/query_demos", comment="查询demo列表"),
         request(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="200",  comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="200", comment=u"年龄")
         ),
         response(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="9999", comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
         )
     )
     API(
         api(method="post", url="/api/v1/demo/alter_demo", comment="修改demo"),
         request(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="200",  comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="200", comment=u"年龄")
         ),
         response(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="9999", comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
         )
     )
     API(
         api(method="post", url="/api/v1/demo/delete_demo", comment="删除demo"),
         request(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="200",  comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="200", comment=u"年龄")
         ),
         response(
-            param(name="name", type="string", min="1", max="32",   comment=u"姓名"),
-            param(name="age",  type="int",    min="0", max="9999", comment=u"年龄")
+            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
+            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
         )
     )
 
-class Auth:
-    service(comment="授权服务", owner="施意波")
+
+class RBAC:
+    service(comment="权限服务", owner="施意波")
     API(
-        api(method="post", url="/api/v1/auth/login", comment="登录"),
+        api(method="post", url="/api/v1/auth/role_create", comment="角色创建"),
+        request(
+            param(name="role_name", type="string", min="1", max="32", comment=u"角色名称"),
+            param(name="password", type="string", min="1", max="32", comment=u"密码")
+        ),
+        response(
+            param(name="jwt", type="string", min="1", max="32", comment=u"jwt"),
+        )
+    )
+    API(
+        api(method="post", url="/api/v1/auth/authority_list", comment="权限列表"),
+        request(
+            param(name="username", type="string", min="1", max="32", comment=u"用户名"),
+            param(name="password", type="string", min="1", max="32", comment=u"密码")
+        ),
+        response(
+        )
+    )
+    API(
+        api(method="post", url="/api/v1/auth/menu_list", comment="权限列表"),
+        request(
+            param(name="username", type="string", min="1", max="32", comment=u"用户名"),
+            param(name="password", type="string", min="1", max="32", comment=u"密码")
+        ),
+        response(
+        )
+    )
+
+
+class Auth:
+    service(comment="认证服务", owner="andy.mei@momenta.ai")
+    API(
+        api(method="post", url="/api/v1/login", comment="登录"),
         request(
             param(name="username", type="string", min="1", max="32", comment=u"用户名"),
             param(name="password", type="string", min="1", max="32", comment=u"密码")
@@ -105,7 +139,7 @@ class Auth:
         )
     )
     API(
-        api(method="post", url="/api/v1/auth/register", comment="注册"),
+        api(method="post", url="/api/v1/register", comment="注册"),
         request(
             param(name="username", type="string", min="1", max="32", comment=u"用户名"),
             param(name="password", type="string", min="1", max="32", comment=u"密码")

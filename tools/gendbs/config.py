@@ -1,6 +1,6 @@
 # MYSQL
 IP = '127.0.0.1'
-PORT = 13306
+PORT = 14006
 USERNAME = 'momenta'
 PASSWORD = 'momenta'
 DATABASE = 'ct_db'

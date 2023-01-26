@@ -10,6 +10,8 @@ from app.api.demo.controller import QueryDemoView
 from app.api.demo.controller import QueryDemosView
 from app.api.demo.controller import AlterDemoView
 from app.api.demo.controller import DeleteDemoView
+from app.api.rbac.controller import LoginView
+from app.api.rbac.controller import RegisterView
 from app.api.auth.controller import LoginView
 from app.api.auth.controller import RegisterView
 
@@ -23,8 +25,12 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/demo/alter_demo', view_func = AlterDemoView.as_view('alter_demo')) # 4.修改demo
 	router.add_url_rule('/api/v1/demo/delete_demo', view_func = DeleteDemoView.as_view('delete_demo')) # 5.删除demo
 
-	# service: 授权服务 owner: 施意波
-	router.add_url_rule('/api/v1/auth/login', view_func = LoginView.as_view('login')) # 1.登录
-	router.add_url_rule('/api/v1/auth/register', view_func = RegisterView.as_view('register')) # 2.注册
+	# service: 权限服务 owner: 施意波
+	router.add_url_rule('/api/v1/auth/login', view_func = LoginView.as_view('login')) # 1.角色创建
+	router.add_url_rule('/api/v1/auth/register', view_func = RegisterView.as_view('register')) # 2.权限创建
+
+	# service: 认证服务 owner: andy.mei@momenta.ai
+	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 1.登录
+	router.add_url_rule('/api/v1/register', view_func = RegisterView.as_view('register')) # 2.注册
 
 	app.register_blueprint(router)
