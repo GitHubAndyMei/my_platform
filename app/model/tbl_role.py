@@ -117,4 +117,11 @@ class TblRole(Base):
         'operator',
         'modify_time',
     ]
+    def to_json(self):
+        value_json = {}
+        for column in self.__table__.columns:
+            column.name = column.name.replace("F_", "")
+            value_json[column.name] = getattr(self, column.name)
+
+        return value_json
 

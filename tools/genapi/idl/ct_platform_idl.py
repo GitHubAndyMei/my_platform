@@ -107,7 +107,7 @@ class RBAC:
         )
     )
     API(
-        api(method="post", url="/api/v1/auth/authority_list", comment="权限列表"),
+        api(method="post", url="/api/v1/authority_list", comment="权限列表"),
         request(
             param(name="username", type="string", min="1", max="32", comment=u"用户名"),
             param(name="password", type="string", min="1", max="32", comment=u"密码")
@@ -116,10 +116,20 @@ class RBAC:
         )
     )
     API(
-        api(method="post", url="/api/v1/auth/menu_list", comment="权限列表"),
+        api(method="post", url="/api/v1/menu_list", comment="菜单列表"),
         request(
-            param(name="username", type="string", min="1", max="32", comment=u"用户名"),
-            param(name="password", type="string", min="1", max="32", comment=u"密码")
+        ),
+        response(
+            param(name="menu_list", type="vector<dict>", min="1", max="32", comment=u"菜单列表"),
+
+        )
+    )
+    API(
+        api(method="post", url="/api/v1/menu_create", comment="菜单创建"),
+        request(
+            param(name="menu_name", type="string", min="1", max="32", comment=u"菜单名称"),
+            param(name="icon", type="string", min="0", max="32", comment=u"图标"),
+            param(name="parent_code", type="string", min="0", max="32", comment=u"图标"),
         ),
         response(
         )
@@ -145,5 +155,6 @@ class Auth:
             param(name="password", type="string", min="1", max="32", comment=u"密码")
         ),
         response(
+
         )
     )

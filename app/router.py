@@ -10,8 +10,10 @@ from app.api.demo.controller import QueryDemoView
 from app.api.demo.controller import QueryDemosView
 from app.api.demo.controller import AlterDemoView
 from app.api.demo.controller import DeleteDemoView
-from app.api.rbac.controller import LoginView
-from app.api.rbac.controller import RegisterView
+from app.api.rbac.controller import RoleCreateView
+from app.api.rbac.controller import AuthorityListView
+from app.api.rbac.controller import MenuListView
+from app.api.rbac.controller import MenuCreateView
 from app.api.auth.controller import LoginView
 from app.api.auth.controller import RegisterView
 
@@ -26,8 +28,10 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/demo/delete_demo', view_func = DeleteDemoView.as_view('delete_demo')) # 5.删除demo
 
 	# service: 权限服务 owner: 施意波
-	router.add_url_rule('/api/v1/auth/login', view_func = LoginView.as_view('login')) # 1.角色创建
-	router.add_url_rule('/api/v1/auth/register', view_func = RegisterView.as_view('register')) # 2.权限创建
+	router.add_url_rule('/api/v1/auth/role_create', view_func = RoleCreateView.as_view('role_create')) # 1.角色创建
+	router.add_url_rule('/api/v1/authority_list', view_func = AuthorityListView.as_view('authority_list')) # 2.权限列表
+	router.add_url_rule('/api/v1/menu_list', view_func = MenuListView.as_view('menu_list')) # 3.菜单列表
+	router.add_url_rule('/api/v1/menu_create', view_func = MenuCreateView.as_view('menu_create')) # 4.菜单创建
 
 	# service: 认证服务 owner: andy.mei@momenta.ai
 	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 1.登录

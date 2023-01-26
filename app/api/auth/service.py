@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from app.model.tbl_user.tbl_user import TblUser
+from app.model.tbl_user import TblUser
 from common.mydb import mydb
 from common.exception import CtException
 from common.result_code import ERR_USER_NOT_FOUND,ERR_PASSWORD,ERR_USER_EXISTS
-from common.utils import hash_password, encode_jwt
+from common.token import hash_password, encode_jwt
 
 from external.protocol.python.login_request import LoginRequest
 from external.protocol.python.login_response import LoginResponse
@@ -24,21 +24,21 @@ class AuthService(object):
         登录
         """
         # 校验用户是否已经存在
-        user = mydb.query(TblUser).filter(TblUser.username == request.username).first()
-        if not user:
+        tbl_user = mydb.query(TblUser).filter(TblUser.username == request.username).first()
+        if not tbl_user:
             raise CtException(ERR_USER_NOT_FOUND)
 
         # 哈希密码
         password = hash_password(request.password)
 
         # 校验密码是否正确
-        if password != user.password:
+        if password != tbl_user.password:
             raise CtException(ERR_PASSWORD)
 
         # 签发token
         jwt = encode_jwt({
-            "user_name": user.username
-        }, user_id=user.id)
+            "user_name": tbl_user.username
+        }, user_id=tbl_user.id)
         response.set_jwt(jwt)
 
     @classmethod
@@ -58,7 +58,7 @@ class AuthService(object):
         password = hash_password(request.password)
 
         # 插入数据库
-        user.password = password
-        user.username = request.username
-        mydb.add(user)
+        tbl_user.password = password
+        tbl_user.username = request.username
+        mydb.add(tbl_user)
         mydb.commit()
