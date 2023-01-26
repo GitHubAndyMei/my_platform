@@ -2,7 +2,7 @@
 import time
 
 # project package
-from common.utils import decode_jwt, encode_jwt
+from common.token import decode_jwt, encode_jwt
 from common.myredis import MyRedis
 from common.exception import CtException
 from common.result_code import USER_NO_LOGIN, TOKEN_EXPIRED

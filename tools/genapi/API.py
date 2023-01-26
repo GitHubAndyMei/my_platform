@@ -21,10 +21,10 @@ class Api:
         self.comment = ""
         self.request  = Request()
         self.response = Response()
-        
+
         self.function = "" # api调用的method
 
-def api(method: str, url: str, comment: str, function=None):
+def api(method: str, url: str, comment: str, function=None,decorators=None):
     obj = Api()
     obj.method = method
     obj.url = url
@@ -34,7 +34,7 @@ def api(method: str, url: str, comment: str, function=None):
     obj.request.comment = comment
     obj.response.name = get_camel_style_name(obj.function)+"Response"
     obj.response.comment = comment
-    
+
     service_name = inspect.stack()[1][3]
     G_SERVICE_DEFINE_DICT[service_name].api_list.append(obj)
     G_PARAM_OWN["type"] = 1 # 首次调用api,参数类型归属于request

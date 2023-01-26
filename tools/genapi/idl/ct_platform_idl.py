@@ -97,20 +97,10 @@ class Demo:
 class RBAC:
     service(comment="权限服务", owner="施意波")
     API(
-        api(method="post", url="/api/v1/auth/role_create", comment="角色创建"),
-        request(
-            param(name="role_name", type="string", min="1", max="32", comment=u"角色名称"),
-            param(name="password", type="string", min="1", max="32", comment=u"密码")
-        ),
-        response(
-            param(name="jwt", type="string", min="1", max="32", comment=u"jwt"),
-        )
-    )
-    API(
-        api(method="post", url="/api/v1/authority_list", comment="权限列表"),
+        api(method="post", url="/api/v1/alter_role", comment="修改用户角色"),
         request(
             param(name="username", type="string", min="1", max="32", comment=u"用户名"),
-            param(name="password", type="string", min="1", max="32", comment=u"密码")
+            param(name="role_code", type="string", min="1", max="32", comment=u"角色代码")
         ),
         response(
         )
