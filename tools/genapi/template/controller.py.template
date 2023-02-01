@@ -27,9 +27,11 @@ ${line.replace("from ", "from external.protocol.python.")}
 	VIEW_NAME  = get_camel_style_name( api.function ) +"View"
 	T_REQUEST  = get_camel_style_name( api.function )+"Request"
 	T_RESPONSE = get_camel_style_name( api.function )+"Response"
-%>
+%>\
 class ${VIEW_NAME}(BaseView):
-
+    """
+    ${api.comment}
+    """
     methods = ["${api.method.upper()}"]  # 允许的请求方式
     request_protocol  = ${T_REQUEST}
     response_protocol = ${T_RESPONSE}

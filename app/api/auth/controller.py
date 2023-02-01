@@ -12,23 +12,25 @@ from external.protocol.python.login_response import LoginResponse
 from external.protocol.python.register_request import RegisterRequest
 from external.protocol.python.register_response import RegisterResponse
 
-
 class LoginView(BaseView):
-
+    """
+    登录
+    """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = LoginRequest
     response_protocol = LoginResponse
     view_func = {
-		"post": AuthService.login
-	}
-
+        "post": AuthService.login
+    }
 
 class RegisterView(BaseView):
-
+    """
+    注册
+    """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = RegisterRequest
     response_protocol = RegisterResponse
     view_func = {
-		"post": AuthService.register
-	}
+        "post": AuthService.register
+    }
 

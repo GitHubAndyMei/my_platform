@@ -18,53 +18,58 @@ from external.protocol.python.query_demo_response import QueryDemoResponse
 from external.protocol.python.query_demos_request import QueryDemosRequest
 from external.protocol.python.query_demos_response import QueryDemosResponse
 
-
 class AddDemoView(BaseView):
-
+    """
+    添加demo
+    """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = AddDemoRequest
     response_protocol = AddDemoResponse
     view_func = {
-		"post": DemoService.add_demo
-	}
-
+        "post": DemoService.add_demo
+    }
 
 class QueryDemoView(BaseView):
-
+    """
+    查询demo
+    """
     methods = ["GET"]  # 允许的请求方式
     request_protocol  = QueryDemoRequest
     response_protocol = QueryDemoResponse
     view_func = {
-		"get": DemoService.query_demo
-	}
-
+        "get": DemoService.query_demo
+    }
 
 class QueryDemosView(BaseView):
-
+    """
+    查询demo列表
+    """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = QueryDemosRequest
     response_protocol = QueryDemosResponse
     view_func = {
-		"post": DemoService.query_demos
-	}
-
+        "post": DemoService.query_demos
+    }
 
 class AlterDemoView(BaseView):
-
+    """
+    修改demo
+    """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = AlterDemoRequest
     response_protocol = AlterDemoResponse
     view_func = {
-		"post": DemoService.alter_demo
-	}
-
+        "post": DemoService.alter_demo
+    }
 
 class DeleteDemoView(BaseView):
-
+    """
+    删除demo
+    """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = DeleteDemoRequest
     response_protocol = DeleteDemoResponse
     view_func = {
-		"post": DemoService.delete_demo
-	}
+        "post": DemoService.delete_demo
+    }
 
