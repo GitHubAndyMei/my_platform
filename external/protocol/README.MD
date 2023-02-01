@@ -202,13 +202,13 @@
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
-| username|string|1|32|用户名|""|
-| role_code|string|1|32|角色代码|""|
+| user_account|string|1|32|用户名|""|
+| role_code|string|1|32|修改后的角色代码|""|
 
 **请求示例：**
 ```json
 {
-	"username":"",
+	"user_account":"",
 	"role_code":""
 }
 ```

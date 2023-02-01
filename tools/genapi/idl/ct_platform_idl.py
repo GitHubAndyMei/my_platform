@@ -99,8 +99,8 @@ class RBAC:
     API(
         api(method="post", url="/api/v1/alter_role", comment="修改用户角色"),
         request(
-            param(name="username", type="string", min="1", max="32", comment=u"用户名"),
-            param(name="role_code", type="string", min="1", max="32", comment=u"角色代码")
+            param(name="user_account", type="string", min="1", max="32", comment=u"用户名"),
+            param(name="role_code", type="string", min="1", max="32", comment=u"修改后的角色代码")
         ),
         response(
         )

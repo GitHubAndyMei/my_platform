@@ -21,14 +21,14 @@ def hash_password(password):
     return hl.hexdigest()
 
 
-def encode_jwt(payload: dict, user_id: str):
+def encode_jwt(payload: dict, user_account: str):
     payload.update({
-        "user_id": user_id,
+        "user_account": user_account,
         "ex": JWT_EXPIRED_TIME
     })
     encoding_jwt = jwt.encode(payload, CONF["jwt"]["key"], algorithm=CONF["jwt"]["algorithm"])
     r = MyRedis()
-    r.set(user_id, "1", ex=JWT_EXPIRED_TIME)
+    r.set(user_account, "1", ex=JWT_EXPIRED_TIME)
     return encoding_jwt
 
 

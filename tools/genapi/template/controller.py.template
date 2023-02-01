@@ -34,7 +34,7 @@ class ${VIEW_NAME}(BaseView):
     request_protocol  = ${T_REQUEST}
     response_protocol = ${T_RESPONSE}
     view_func = {
-		"${api.method}": ${SERVICE.name}Service.${api.function}
-	}
+        "${api.method}": ${SERVICE.name}Service.${api.function}
+    }
 
 % endfor

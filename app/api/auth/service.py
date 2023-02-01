@@ -37,8 +37,8 @@ class AuthService(object):
 
         # 签发token
         jwt = encode_jwt({
-            "user_name": tbl_user.username
-        }, user_id=tbl_user.id)
+            "user_account": tbl_user.user_account
+        }, user_account=tbl_user.user_account)
         response.set_jwt(jwt)
 
     @classmethod
