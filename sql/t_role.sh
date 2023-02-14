@@ -10,9 +10,9 @@ table_sum=1
 table_base_name="t_role"
 
 mycmd="mysql -h$host -u$username -p$password -P$port --default-character-set=utf8mb4"
-for i in seq 1 $table_sum;
+for i in `seq 1 $table_sum`;
 do
-table_index=expr $i - 1
+table_index=`expr $i - 1`
 table_name=${table_base_name}_$table_index
 if [ $table_sum -eq 1 ];then
 	table_name=$table_base_name

@@ -12,8 +12,8 @@ services:
       MYSQL_ROOT_PASSWORD: root # root密码
       MYSQL_DATABASE: my_db
     volumes:
-      - "/usr/local/docker/mydata/mysql/data:/var/lib/mysql" # 存放数据文件
-      - "/usr/local/docker/mydata/mysql/log:/var/log/mysql"  # 存放日志文件
+      - "/app/mysql/data:/var/lib/mysql" # 存放数据文件
+      - "/app/mysql/log:/var/log/mysql"  # 存放日志文件
 
   redis:
     build:
@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: my_redis
     volumes:
-      - /usr/local/docker/mydata/redis/data:/data
+      - /app/redis/data:/data
     restart: always
     ports:
       - "16379:6379"

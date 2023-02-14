@@ -1,5 +1,5 @@
 db="my_db"
 host="127.0.0.1"
-port="14006"
-username="my"
-password="my"
+port="13306"
+username="my_platform"
+password="my_platform"

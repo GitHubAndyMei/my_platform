@@ -1,8 +1,8 @@
 # MYSQL
 IP = '127.0.0.1'
-PORT = 14006
-USERNAME = 'my'
-PASSWORD = 'my'
+PORT = 13306
+USERNAME = 'my_platform'
+PASSWORD = 'my_platform'
 DATABASE = 'my_db'
 
 ORM = 'sqlalchemy'
