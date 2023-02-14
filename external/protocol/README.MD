@@ -279,13 +279,15 @@
 | role_code|string|1|64|角色代码|""|
 | role_name|string|1|64|角色名称|""|
 | is_admin|int|0|1|是否是管理员|0|
+| status|int|0|2|角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用|0|
 
 **请求示例：**
 ```json
 {
 	"role_code":"",
 	"role_name":"",
-	"is_admin":0
+	"is_admin":0,
+	"status":0
 }
 ```
 
@@ -379,10 +381,14 @@
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
+| role_name|string|1|64|角色名称|""|
+| status|int|0|2|角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用|0|
 
 **请求示例：**
 ```json
 {
+	"role_name":"",
+	"status":0
 }
 ```
 

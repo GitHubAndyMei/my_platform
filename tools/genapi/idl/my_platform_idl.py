@@ -137,7 +137,8 @@ class RBAC:
         request(
             param(name="role_code", type="string", min="1", max="64", comment=u"角色代码"),
             param(name="role_name", type="string", min="1", max="64", comment=u"角色名称"),
-            param(name="is_admin",  type="int",    min="0", max="1",  comment=u"是否是管理员")
+            param(name="is_admin",  type="int",    min="0", max="1",  comment=u"是否是管理员"),
+            param(name="status",    type="int",    min="0", max="2",  comment=u"角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用")
         ),
         response(
         )
@@ -164,6 +165,8 @@ class RBAC:
     API(
         api(method="post", url="/api/v1/RBAC/query_roles", comment="查询角色列表"),
         request(
+            param(name="role_name", type="string", min="1", max="64", comment=u"角色名称"),
+            param(name="status",    type="int",    min="0", max="2",  comment=u"角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用")
         ),
         response(
             param(name="roles", type="vector<RoleDetail>", min="MIN", max="MAX", comment=u"角色列表"),
