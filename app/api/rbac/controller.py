@@ -39,7 +39,7 @@ from external.protocol.python.role_detail import *
 
 class AddRoleView(BaseView):
     """
-    添加角色
+    增加角色
     """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = AddRoleRequest
@@ -127,7 +127,7 @@ class QueryPermissionsView(BaseView):
 
 class AddUserPermissionView(BaseView):
     """
-    添加角色权限
+    增加角色权限
     """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = AddUserPermissionRequest
@@ -160,7 +160,7 @@ class QueryUserPermissionsView(BaseView):
 
 class AddUserRoleView(BaseView):
     """
-    添加用户角色
+    增加用户角色
     """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = AddUserRoleRequest

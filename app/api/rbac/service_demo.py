@@ -40,7 +40,7 @@ class RBACService(object):
 	@classmethod
 	def add_role(cls, request: AddRoleRequest, response: AddRoleResponse):
 		"""
-		添加角色
+		增加角色
 		"""
 		pass
 
@@ -104,7 +104,7 @@ class RBACService(object):
 	@classmethod
 	def add_user_permission(cls, request: AddUserPermissionRequest, response: AddUserPermissionResponse):
 		"""
-		添加角色权限
+		增加角色权限
 		"""
 		pass
 
@@ -128,7 +128,7 @@ class RBACService(object):
 	@classmethod
 	def add_user_role(cls, request: AddUserRoleRequest, response: AddUserRoleResponse):
 		"""
-		添加用户角色
+		增加用户角色
 		"""
 		pass
 

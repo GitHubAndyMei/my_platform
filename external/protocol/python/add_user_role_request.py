@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 class AddUserRoleRequest:
 	"""
-	添加用户角色
+	增加用户角色
 	"""
 	def __init__(self) -> None:
 		self._user_account = ""  # 用户账号

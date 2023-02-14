@@ -9,8 +9,6 @@ from external.protocol.python.alter_demo_request import AlterDemoRequest
 from external.protocol.python.alter_demo_response import AlterDemoResponse
 from external.protocol.python.delete_demo_request import DeleteDemoRequest
 from external.protocol.python.delete_demo_response import DeleteDemoResponse
-from external.protocol.python.query_demo_request import QueryDemoRequest
-from external.protocol.python.query_demo_response import QueryDemoResponse
 from external.protocol.python.query_demos_request import QueryDemosRequest
 from external.protocol.python.query_demos_response import QueryDemosResponse
 
@@ -21,23 +19,15 @@ class DemoService(object):
 	@classmethod
 	def add_demo(cls, request: AddDemoRequest, response: AddDemoResponse):
 		"""
-		添加demo
+		增加demo
 		"""
 		pass
 
 
 	@classmethod
-	def query_demo(cls, request: QueryDemoRequest, response: QueryDemoResponse):
+	def delete_demo(cls, request: DeleteDemoRequest, response: DeleteDemoResponse):
 		"""
-		查询demo
-		"""
-		pass
-
-
-	@classmethod
-	def query_demos(cls, request: QueryDemosRequest, response: QueryDemosResponse):
-		"""
-		查询demo列表
+		删除demo
 		"""
 		pass
 
@@ -51,9 +41,9 @@ class DemoService(object):
 
 
 	@classmethod
-	def delete_demo(cls, request: DeleteDemoRequest, response: DeleteDemoResponse):
+	def query_demos(cls, request: QueryDemosRequest, response: QueryDemosResponse):
 		"""
-		删除demo
+		查询demo列表
 		"""
 		pass
 

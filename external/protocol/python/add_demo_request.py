@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 class AddDemoRequest:
 	"""
-	添加demo
+	增加demo
 	"""
 	def __init__(self) -> None:
 		self._name = ""  # 姓名
@@ -71,8 +71,8 @@ class AddDemoRequest:
 		# check params
 		if len( data_dict.get("name") ) < 1:
 			raise Exception("param:name error, out of range min:1!")
-		if len( data_dict.get("name") ) > 32:
-			raise Exception("param:name error, out of range max:32!")
+		if len( data_dict.get("name") ) > 64:
+			raise Exception("param:name error, out of range max:64!")
 		if data_dict.get("age") < 0:
 			raise Exception("param:age error, out of range min:0!")
 		if data_dict.get("age") > 200:

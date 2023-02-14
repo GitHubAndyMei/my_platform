@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 class AddUserPermissionResponse:
 	"""
-	添加角色权限
+	增加角色权限
 	"""
 	def __init__(self) -> None:
 		pass

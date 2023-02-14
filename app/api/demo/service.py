@@ -21,7 +21,7 @@ class DemoService(object):
 	@classmethod
 	def add_demo(cls, request: AddDemoRequest, response: AddDemoResponse):
 		"""
-		添加demo
+		增加demo
 		"""
 		pass
 

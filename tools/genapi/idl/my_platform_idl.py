@@ -38,63 +38,43 @@ Note:
 class Demo:
     service(comment="示例服务", owner="andy.mei")
     API(
-        api(method="post", url="/api/v1/demo/add_demo", comment="添加demo"),
+        api(method="post", url="/api/v1/demo/add_demo", comment="增加demo"),
         request(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="200", comment=u"年龄")
+            param(name="name", type="string", min="1", max="64",  comment=u"姓名"),
+            param(name="age",  type="int",    min="0", max="200", comment=u"年龄")
         ),
         response(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
-        )
-    )
-    API(
-        api(method="get", url="/api/v1/demo/query_demo", comment="查询demo"),
-        request(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="string", min="0", max="200", comment=u"年龄")
-        ),
-        response(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="string", min="0", max="9999", comment=u"年龄")
-        )
-    )
-    API(
-        api(method="post", url="/api/v1/demo/query_demos", comment="查询demo列表"),
-        request(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="200", comment=u"年龄")
-        ),
-        response(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
-        )
-    )
-    API(
-        api(method="post", url="/api/v1/demo/alter_demo", comment="修改demo"),
-        request(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="200", comment=u"年龄")
-        ),
-        response(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
         )
     )
     API(
         api(method="post", url="/api/v1/demo/delete_demo", comment="删除demo"),
         request(
             param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="200", comment=u"年龄")
         ),
         response(
-            param(name="name", type="string", min="1", max="32", comment=u"姓名"),
-            param(name="age", type="int", min="0", max="9999", comment=u"年龄")
+        )
+    )
+    API(
+        api(method="post", url="/api/v1/demo/alter_demo", comment="修改demo"),
+        request(
+            param(name="name", type="string", min="1", max="32",  comment=u"姓名"),
+            param(name="age",  type="int",    min="0", max="200", comment=u"年龄")
+        ),
+        response(
+        )
+    )
+    API(
+        api(method="post", url="/api/v1/demo/query_demos", comment="查询demo列表"),
+        request(
+        ),
+        response(
+            param(name="names", type="vector<string>", min="MIN", max="MAX", comment=u"姓名列表"),
         )
     )
 
+
 class Auth:
-    service(comment="认证服务", owner="andy.mei")
+    service(comment="认证服务", owner="施意波")
     API(
         api(method="post", url="/api/v1/login", comment="登录"),
         request(
@@ -133,7 +113,7 @@ class RBAC:
     service(comment="权限服务", owner="施意波")
     # 角色接口
     API(
-        api(method="post", url="/api/v1/RBAC/add_role",    comment="添加角色"),
+        api(method="post", url="/api/v1/RBAC/add_role",    comment="增加角色"),
         request(
             param(name="role_code", type="string", min="1", max="64", comment=u"角色代码"),
             param(name="role_name", type="string", min="1", max="64", comment=u"角色名称"),
@@ -205,7 +185,7 @@ class RBAC:
 
     # 角色权限接口
     API(
-        api(method="post", url="/api/v1/RBAC/add_user_permission",    comment="添加角色权限"),
+        api(method="post", url="/api/v1/RBAC/add_user_permission",    comment="增加角色权限"),
         request(
         ),
         response(
@@ -228,7 +208,7 @@ class RBAC:
 
     # 用户角色接口
     API(
-        api(method="post", url="/api/v1/RBAC/add_user_role",   comment="添加用户角色"),
+        api(method="post", url="/api/v1/RBAC/add_user_role",   comment="增加用户角色"),
         request(
             param(name="user_account", type="string", min="1", max="64", comment=u"用户账号"),
             param(name="role_code",    type="string", min="1", max="64", comment=u"角色代码")

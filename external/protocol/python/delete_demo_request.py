@@ -15,8 +15,6 @@ class DeleteDemoRequest:
 	def __init__(self) -> None:
 		self._name = ""  # 姓名
 		self._name_u = 0  # 姓名设置标识
-		self._age = 0  # 年龄
-		self._age_u = 0  # 年龄设置标识
 		pass
 
 
@@ -36,29 +34,12 @@ class DeleteDemoRequest:
 		return self._name
 
 
-	# 年龄
-	def set_age(self, age):
-		self._age = age
-		self._age_u = 1
-
-
-	@property
-	def is_set_age(self):
-		return self._age_u != 0
-
-
-	@property
-	def age(self):
-		return self._age
-
-
 	def to_dict(self) -> dict:
 		"""
 		Convert object to dict and return
 		"""
 		data_dict = {}
 		data_dict["name"] = self._name  # 姓名
-		data_dict["age"] = self._age  # 年龄
 
 		return data_dict
 
@@ -73,14 +54,9 @@ class DeleteDemoRequest:
 			raise Exception("param:name error, out of range min:1!")
 		if len( data_dict.get("name") ) > 32:
 			raise Exception("param:name error, out of range max:32!")
-		if data_dict.get("age") < 0:
-			raise Exception("param:age error, out of range min:0!")
-		if data_dict.get("age") > 200:
-			raise Exception("param:age error, out of range max:200!")
 
 		# parse params
 		self.set_name( data_dict.get("name") )  # 姓名
-		self.set_age( data_dict.get("age") )  # 年龄
 
 
 	def to_json(self):

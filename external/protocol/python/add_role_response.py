@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 class AddRoleResponse:
 	"""
-	添加角色
+	增加角色
 	"""
 	def __init__(self) -> None:
 		pass

@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 class AddRoleRequest:
 	"""
-	添加角色
+	增加角色
 	"""
 	def __init__(self) -> None:
 		self._role_code = ""  # 角色代码

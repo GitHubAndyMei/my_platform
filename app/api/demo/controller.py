@@ -13,14 +13,12 @@ from external.protocol.python.alter_demo_request import AlterDemoRequest
 from external.protocol.python.alter_demo_response import AlterDemoResponse
 from external.protocol.python.delete_demo_request import DeleteDemoRequest
 from external.protocol.python.delete_demo_response import DeleteDemoResponse
-from external.protocol.python.query_demo_request import QueryDemoRequest
-from external.protocol.python.query_demo_response import QueryDemoResponse
 from external.protocol.python.query_demos_request import QueryDemosRequest
 from external.protocol.python.query_demos_response import QueryDemosResponse
 
 class AddDemoView(BaseView):
     """
-    添加demo
+    增加demo
     """
     methods = ["POST"]  # 允许的请求方式
     request_protocol  = AddDemoRequest
@@ -29,26 +27,15 @@ class AddDemoView(BaseView):
         "post": DemoService.add_demo
     }
 
-class QueryDemoView(BaseView):
+class DeleteDemoView(BaseView):
     """
-    查询demo
-    """
-    methods = ["GET"]  # 允许的请求方式
-    request_protocol  = QueryDemoRequest
-    response_protocol = QueryDemoResponse
-    view_func = {
-        "get": DemoService.query_demo
-    }
-
-class QueryDemosView(BaseView):
-    """
-    查询demo列表
+    删除demo
     """
     methods = ["POST"]  # 允许的请求方式
-    request_protocol  = QueryDemosRequest
-    response_protocol = QueryDemosResponse
+    request_protocol  = DeleteDemoRequest
+    response_protocol = DeleteDemoResponse
     view_func = {
-        "post": DemoService.query_demos
+        "post": DemoService.delete_demo
     }
 
 class AlterDemoView(BaseView):
@@ -62,14 +49,14 @@ class AlterDemoView(BaseView):
         "post": DemoService.alter_demo
     }
 
-class DeleteDemoView(BaseView):
+class QueryDemosView(BaseView):
     """
-    删除demo
+    查询demo列表
     """
     methods = ["POST"]  # 允许的请求方式
-    request_protocol  = DeleteDemoRequest
-    response_protocol = DeleteDemoResponse
+    request_protocol  = QueryDemosRequest
+    response_protocol = QueryDemosResponse
     view_func = {
-        "post": DemoService.delete_demo
+        "post": DemoService.query_demos
     }
 
