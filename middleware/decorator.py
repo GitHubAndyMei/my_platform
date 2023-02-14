@@ -4,7 +4,7 @@ import time
 # project package
 from common.token import decode_jwt, encode_jwt
 from common.myredis import MyRedis
-from common.exception import CtException
+from common.exception import MyException
 from common.result_code import USER_NO_LOGIN, TOKEN_EXPIRED
 
 # third package
@@ -24,13 +24,13 @@ def login_require(func):
         token = request.headers.get("Authorization")
         # 校验token准确性
         if not token:
-            raise CtException(USER_NO_LOGIN)
+            raise MyException(USER_NO_LOGIN)
 
         # 对token解码，判断token准确性
         try:
             payload = decode_jwt(token)
         except Exception as e:
-            raise CtException(USER_NO_LOGIN)
+            raise MyException(USER_NO_LOGIN)
 
         # 判断token是否过期
         ex = payload.get("ex")
@@ -44,7 +44,7 @@ def login_require(func):
                 g.token = encode_jwt(payload, user_account)
             else:
                 # token完全过期
-                raise CtException(TOKEN_EXPIRED)
+                raise MyException(TOKEN_EXPIRED)
 
         # 设置user_account
         g.user_account = payload.get("user_account")

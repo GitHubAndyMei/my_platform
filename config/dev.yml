@@ -1,15 +1,15 @@
 mysql:
   host: 127.0.0.1
   port: 14006
-  username: momenta
-  password: momenta
-  db: ct_db
+  username: robot
+  password: robot
+  db: robot_db
   autocommit: true
 
 redis:
   host: 127.0.0.1
   port: 16379
-  password: momenta
+  password: robot
   charset: utf-8
   db: 0
   decode_response: True

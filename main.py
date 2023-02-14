@@ -1,5 +1,5 @@
 """
-    This project is about Sanity CT management platform.
+    This project is about Robot management platform.
 """
 from flask import Flask
 

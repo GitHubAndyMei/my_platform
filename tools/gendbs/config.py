@@ -1,9 +1,9 @@
 # MYSQL
 IP = '127.0.0.1'
 PORT = 14006
-USERNAME = 'momenta'
-PASSWORD = 'momenta'
-DATABASE = 'ct_db'
+USERNAME = 'robot'
+PASSWORD = 'robot'
+DATABASE = 'robot_db'
 
 ORM = 'sqlalchemy'
 

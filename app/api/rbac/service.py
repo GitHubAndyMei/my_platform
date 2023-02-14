@@ -35,7 +35,7 @@ class RBACService(object):
         tbl_user_role = mydb.query(TblUserRole).filter(TblUserRole.user_account == g.user_account).first()
         tbl_role = mydb.query(TblRole).filter(TblRole.role_code == tbl_user_role.role_code).first()
         if not tbl_role.is_admin:
-            raise CtException(IS_NOT_ADMIN)
+            raise MyException(IS_NOT_ADMIN)
 
         # 获取修改用户的角色信息
         tbl_user_role = mydb.query(TblUserRole).filter(TblUserRole.user_account == request.user_account).first()

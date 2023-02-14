@@ -1,4 +1,4 @@
-# 					Sanity CT Platform数据库设计
+# 					Robot Platform数据库设计
 ## 1.菜单表(t_menu)
 
 

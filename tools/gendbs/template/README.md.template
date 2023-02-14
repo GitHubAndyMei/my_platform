@@ -2,7 +2,7 @@
 from table import Table
 from template_param import TemplateParam
 %>\
-# 					Sanity CT Platform数据库设计
+# 					Robot Platform数据库设计
 <%
 table_seq = 0
 %>\

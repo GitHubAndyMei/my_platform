@@ -5,7 +5,7 @@ exception modul
 from common.result_code import CustomStatus
 
 
-class CtException(Exception):
+class MyException(Exception):
     '''
     @brief ct异常类,所有异常类需要继承此类
     '''

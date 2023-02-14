@@ -3,7 +3,7 @@ from typing import Dict
 from flask.views import MethodView
 from flask import request, jsonify
 
-from common.exception import CtException
+from common.exception import MyException
 from common.result_code import ERR_SYSTEM_BUSY, SUCCESS, CustomStatus
 from common.logger import logger
 from config import ENV
@@ -37,7 +37,7 @@ class BaseView(MethodView):
                 request_obj.to_obj(request_dict)
                 handler(request_obj, response_obj)
                 return jsonify(response(SUCCESS, response_obj.to_dict()))
-            except CtException as e:
+            except MyException as e:
                 logger.error(e)
                 return jsonify(response(CustomStatus(e.code, e.message)))
             except Exception as e:

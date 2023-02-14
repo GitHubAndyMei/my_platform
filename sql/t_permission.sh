@@ -21,18 +21,17 @@ fi
 $mycmd -e "drop table if exists $db.$table_name;"
 sql="
 create table $db.$table_name (
-  F_id                  int(11)                                    NOT NULL AUTO_INCREMENT,
-  F_permission_code     varchar(64)  COLLATE utf8mb4_unicode_ci    NOT NULL DEFAULT '' COMMENT '权限代码',
-  F_permission_name     varchar(64)  COLLATE utf8mb4_unicode_ci    NOT NULL DEFAULT '' COMMENT '权限名称',
-  F_parent_per_code     varchar(64)  COLLATE utf8mb4_unicode_ci    NOT NULL DEFAULT '' COMMENT '父权限代码',
-  F_url                 varchar(128) COLLATE utf8mb4_unicode_ci    NOT NULL DEFAULT '' COMMENT '路径地址',
-  F_sort                int(11)                                    NOT NULL DEFAULT '999' COMMENT '排序位置，默认最后一个',
-  F_deleted             tinyint(1)   COLLATE utf8mb4_unicode_ci    NOT NULL DEFAULT 0   COMMENT '删除标记 enum:0,no,否#1,yes,是',
-  F_operator            varchar(32)  COLLATE utf8mb4_unicode_ci    NOT NULL DEFAULT ''  COMMENT '操作员',
-  F_create_time         bigint(20)                                 NOT NULL DEFAULT '0' COMMENT '创建时间戳 单位秒',
-  F_modify_time         bigint(20)                                 NOT NULL DEFAULT '0' COMMENT '更新时间戳 单位秒',
-  PRIMARY KEY (F_id) USING BTREE,
-  UNIQUE KEY ${table_name}_F_permission_code (F_permission_code),
+  F_id                     int(11)      NOT NULL AUTO_INCREMENT,
+  F_permission_code        varchar(64)  NOT NULL DEFAULT ''  COMMENT '权限代码',
+  F_parent_permission_code varchar(64)  NOT NULL DEFAULT ''  COMMENT '父权限代码',
+  F_permission_name        varchar(64)  NOT NULL DEFAULT ''  COMMENT '权限名称',
+  F_url                    varchar(128) NOT NULL DEFAULT ''  COMMENT '路径地址',
+  F_deleted                tinyint(1)   NOT NULL DEFAULT 0   COMMENT '删除标记 enum:0,no,否#1,yes,是',
+  F_operator               varchar(32)  NOT NULL DEFAULT ''  COMMENT '操作员',
+  F_create_time            bigint(20)   NOT NULL DEFAULT '0' COMMENT '创建时间戳 单位秒',
+  F_modify_time            bigint(20)   NOT NULL DEFAULT '0' COMMENT '更新时间戳 单位秒',
+  PRIMARY KEY (F_id),
+  UNIQUE KEY unique_index_${table_name}_permission_code (F_permission_code),
   INDEX index_${table_name}_modify_time (F_modify_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='权限表';
 "

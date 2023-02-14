@@ -1,5 +1,5 @@
-CREATE USER 'momenta'@'127.0.0.1' IDENTIFIED BY 'momenta';
-CREATE USER 'momenta'@'%' IDENTIFIED BY 'momenta';
+CREATE USER 'robot'@'127.0.0.1' IDENTIFIED BY 'robot';
+CREATE USER 'robot'@'%' IDENTIFIED BY 'robot';
 
-GRANT ALL ON *.* TO 'momenta'@'127.0.0.1' WITH GRANT OPTION;
-GRANT ALL ON *.* TO 'momenta'@'%' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'robot'@'127.0.0.1' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'robot'@'%' WITH GRANT OPTION;
