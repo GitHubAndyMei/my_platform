@@ -24,7 +24,7 @@ class AuthService(object):
         登录
         """
         # 校验用户是否已经存在
-        tbl_user = mydb.query(TblUser).filter(TblUser.username == request.username).first()
+        tbl_user = mydb.query(TblUser).filter(TblUser.user_name == request.user_name).first()
         if not tbl_user:
             raise MyException(ERR_USER_NOT_FOUND)
 
@@ -47,7 +47,7 @@ class AuthService(object):
         注册
         """
         # 校验用户是否已经存在
-        user = mydb.query(TblUser).filter(TblUser.username == request.username).first()
+        user = mydb.query(TblUser).filter(TblUser.user_name == request.user_name).first()
         if user:
             raise MyException(ERR_USER_EXISTS)
 
@@ -59,6 +59,6 @@ class AuthService(object):
 
         # 插入数据库
         tbl_user.password = password
-        tbl_user.username = request.username
+        tbl_user.user_name = request.user_name
         mydb.add(tbl_user)
         mydb.commit()

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: UTF-8 -*-
 import pymysql
-from config import IP, PORT, USERNAME, PASSWORD, DATABASE
+from config import IP, PORT, user_name, PASSWORD, DATABASE
 
 
 class Field(object):
@@ -69,7 +69,7 @@ class Table(object):
     def show_full_fields_from_table(name):
         db = pymysql.connect(host=IP,
                              port=PORT,
-                             user=USERNAME,
+                             user=user_name,
                              password=PASSWORD,
                              database=DATABASE,
                              charset="utf8")
@@ -98,7 +98,7 @@ class Table(object):
     def show_table(name):
         db = pymysql.connect(host=IP,
                              port=PORT,
-                             user=USERNAME,
+                             user=user_name,
                              password=PASSWORD,
                              database=DATABASE)
         cursor = db.cursor()
@@ -121,7 +121,7 @@ class Table(object):
     def show_index_from_table(table_name):
         db = pymysql.connect(host=IP,
                              port=PORT,
-                             user=USERNAME,
+                             user=user_name,
                              password=PASSWORD,
                              database=DATABASE)
         cursor = db.cursor()

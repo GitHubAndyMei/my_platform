@@ -10,29 +10,51 @@ from app.api.demo.controller import QueryDemoView
 from app.api.demo.controller import QueryDemosView
 from app.api.demo.controller import AlterDemoView
 from app.api.demo.controller import DeleteDemoView
-from app.api.rbac.controller import AlterRoleView
-from app.api.rbac.controller import MenuListView
-from app.api.rbac.controller import MenuCreateView
 from app.api.auth.controller import LoginView
 from app.api.auth.controller import RegisterView
+from app.api.rbac.controller import AddRoleView
+from app.api.rbac.controller import DeleteRoleView
+from app.api.rbac.controller import AlterRoleView
+from app.api.rbac.controller import QueryRolesView
+from app.api.rbac.controller import AddPermissionView
+from app.api.rbac.controller import DeletePermissionView
+from app.api.rbac.controller import AlterPermissionView
+from app.api.rbac.controller import QueryPermissionsView
+from app.api.rbac.controller import AddUserPermissionView
+from app.api.rbac.controller import DeleteUserPermissionView
+from app.api.rbac.controller import QueryUserPermissionsView
+from app.api.rbac.controller import AddUserRoleView
+from app.api.rbac.controller import DeleteUserRoleView
+from app.api.rbac.controller import QueryUserRolesView
 
 router = Blueprint('api', __name__)
 
 def route_register(app: Flask):
-	# service: 示例服务 owner: andy.mei@my.ai
+	# service: 示例服务 owner: andy.mei
 	router.add_url_rule('/api/v1/demo/add_demo', view_func = AddDemoView.as_view('add_demo')) # 1.添加demo
 	router.add_url_rule('/api/v1/demo/query_demo', view_func = QueryDemoView.as_view('query_demo')) # 2.查询demo
 	router.add_url_rule('/api/v1/demo/query_demos', view_func = QueryDemosView.as_view('query_demos')) # 3.查询demo列表
 	router.add_url_rule('/api/v1/demo/alter_demo', view_func = AlterDemoView.as_view('alter_demo')) # 4.修改demo
 	router.add_url_rule('/api/v1/demo/delete_demo', view_func = DeleteDemoView.as_view('delete_demo')) # 5.删除demo
 
-	# service: 权限服务 owner: 施意波
-	router.add_url_rule('/api/v1/alter_role', view_func = AlterRoleView.as_view('alter_role')) # 1.修改用户角色
-	router.add_url_rule('/api/v1/menu_list', view_func = MenuListView.as_view('menu_list')) # 2.菜单列表
-	router.add_url_rule('/api/v1/menu_create', view_func = MenuCreateView.as_view('menu_create')) # 3.菜单创建
-
-	# service: 认证服务 owner: andy.mei@my.ai
+	# service: 认证服务 owner: andy.mei
 	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 1.登录
 	router.add_url_rule('/api/v1/register', view_func = RegisterView.as_view('register')) # 2.注册
+
+	# service: 权限服务 owner: 施意波
+	router.add_url_rule('/api/v1/RBAC/add_role', view_func = AddRoleView.as_view('add_role')) # 1.添加角色
+	router.add_url_rule('/api/v1/RBAC/delete_role', view_func = DeleteRoleView.as_view('delete_role')) # 2.删除角色
+	router.add_url_rule('/api/v1/RBAC/alter_role', view_func = AlterRoleView.as_view('alter_role')) # 3.修改角色
+	router.add_url_rule('/api/v1/RBAC/query_roles', view_func = QueryRolesView.as_view('query_roles')) # 4.查询角色列表
+	router.add_url_rule('/api/v1/RBAC/add_permission', view_func = AddPermissionView.as_view('add_permission')) # 5.增加权限
+	router.add_url_rule('/api/v1/RBAC/delete_permission', view_func = DeletePermissionView.as_view('delete_permission')) # 6.删除权限
+	router.add_url_rule('/api/v1/RBAC/alter_permission', view_func = AlterPermissionView.as_view('alter_permission')) # 7.修改权限
+	router.add_url_rule('/api/v1/RBAC/query_permissions', view_func = QueryPermissionsView.as_view('query_permissions')) # 8.查询权限列表
+	router.add_url_rule('/api/v1/RBAC/add_user_permission', view_func = AddUserPermissionView.as_view('add_user_permission')) # 9.添加角色权限
+	router.add_url_rule('/api/v1/RBAC/delete_user_permission', view_func = DeleteUserPermissionView.as_view('delete_user_permission')) # 10.删除角色权限
+	router.add_url_rule('/api/v1/RBAC/query_user_permissions', view_func = QueryUserPermissionsView.as_view('query_user_permissions')) # 11.查询角色权限
+	router.add_url_rule('/api/v1/RBAC/add_user_role', view_func = AddUserRoleView.as_view('add_user_role')) # 12.添加用户角色
+	router.add_url_rule('/api/v1/RBAC/delete_user_role', view_func = DeleteUserRoleView.as_view('delete_user_role')) # 13.删除用户角色
+	router.add_url_rule('/api/v1/RBAC/query_user_roles', view_func = QueryUserRolesView.as_view('query_user_roles')) # 14.查询用户角色
 
 	app.register_blueprint(router)

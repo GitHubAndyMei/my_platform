@@ -11,12 +11,12 @@ from config import CONF
 
 
 def create_db_url():
-    username = CONF.get('mysql').get('username')
+    user_name = CONF.get('mysql').get('user_name')
     password = CONF.get('mysql').get('password', '')
     db = CONF.get('mysql').get('db')
     host = CONF.get('mysql').get('host')
     port = CONF.get('mysql').get('port')
-    url = make_url(f'mysql+pymysql://{username}:{password}@{host}:{port}/{db}')
+    url = make_url(f'mysql+pymysql://{user_name}:{password}@{host}:{port}/{db}')
     db_url = url.update_query_dict({'charset': 'utf8mb4', 'autocommit': 'true'})
     print("db_url", db_url)
     return db_url
@@ -47,7 +47,7 @@ import time
 def sing(t):
     from app.model.tbl_user.tbl_user import TblUser
     tb = TblUser()
-    tb.username = f'test{t}'
+    tb.user_name = f'test{t}'
     tb.password = f'test{t}'
     tb.id = t
     mydb.add(tb)

@@ -8,9 +8,9 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-class AlterRoleResponse:
+class QueryUserPermissionsResponse:
 	"""
-	修改角色
+	查询角色权限
 	"""
 	def __init__(self) -> None:
 		pass

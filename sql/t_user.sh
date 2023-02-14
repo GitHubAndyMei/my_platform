@@ -9,7 +9,7 @@ done < ./config.sh
 table_sum=1
 table_base_name="t_user"
 
-mycmd="mysql -h$host -u$username -p$password -P$port --default-character-set=utf8mb4"
+mycmd="mysql -h$host -u$user_name -p$password -P$port --default-character-set=utf8mb4"
 for i in `seq 1 $table_sum`;
 do
 table_index=`expr $i - 1`
@@ -31,6 +31,7 @@ create table $db.$table_name (
     F_modify_time            bigint        NOT NULL DEFAULT 0         COMMENT '更新时间戳 单位秒',
     PRIMARY KEY (F_id),
     UNIQUE KEY unique_index_${table_name}_user_account (F_user_account),
+    UNIQUE KEY unique_index_${table_name}_user_name    (F_user_name),
     INDEX index_${table_name}_modify_time (F_modify_time)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '用户表';
 "

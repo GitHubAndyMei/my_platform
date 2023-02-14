@@ -19,22 +19,6 @@ from sqlalchemy import (
     text)
 
 
-class EnumTblUserRoleIsAdmin(enum.Enum):
-    IS_ADMIN_NORMAL_USER = '0'  # 普通用户
-    IS_ADMIN_ADMIN = '1'  # 管理员用户
-
-    @classmethod
-    def get_desc(cls, enum_value: str):
-        '''
-        获取是否是管理员 值描述
-        '''
-        desc_dict = {
-            '0': '普通用户',
-            '1': '管理员用户',
-        }
-
-        return desc_dict.get(enum_value, '未知状态')
-
 class EnumTblUserRoleDeleted(enum.Enum):
     DELETED_NO = '0'  # 否
     DELETED_YES = '1'  # 是
@@ -53,7 +37,7 @@ class EnumTblUserRoleDeleted(enum.Enum):
 
 class TblUserRole(Base):
     '''
-    用户角色关联表
+    用户角色表
     '''
     # 表名
     __tablename__ = 't_user_role'
@@ -61,9 +45,7 @@ class TblUserRole(Base):
     # 字段定义
     id = Column(Integer, name='F_id', comment='', primary_key=True, autoincrement=True)
     user_account = Column(String(64), name='F_user_account', comment='用户账号', nullable=False, default='')
-    role_code = Column(String(64), name='F_role_code', comment='组织代码', nullable=False, default='')
-    is_admin = Column(String(1), name='F_is_admin', comment='是否是管理员 enum:0,normal_user,普通用户#1,admin,管理员用户', nullable=False, default='')
-    remark = Column(Text, name='F_remark', comment='备注', nullable=False, default=text(''))
+    role_code = Column(String(64), name='F_role_code', comment='角色代码', nullable=False, default='')
     deleted = Column(String(1), name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default='0')
     operator = Column(String(32), name='F_operator', comment='操作员', nullable=False, default='')
     create_time = Column(BigInteger, name='F_create_time', comment='创建时间戳 单位秒', nullable=False, default=0)
@@ -71,7 +53,7 @@ class TblUserRole(Base):
 
     # 唯一索引
     __table_args__ = (
-        UniqueConstraint('F_role_code', name='t_user_role_F_role_code'),
+        UniqueConstraint('F_user_account', 'F_role_code', name='unique_index_t_user_role_user_account_role_code'),
     )
 
     # 普通索引
@@ -80,9 +62,7 @@ class TblUserRole(Base):
     # 字段别名
     ID = 'id'  # 
     USER_ACCOUNT = 'user_account'  # 用户账号
-    ROLE_CODE = 'role_code'  # 组织代码
-    IS_ADMIN = 'is_admin'  # 是否是管理员 enum:0,normal_user,普通用户#1,admin,管理员用户
-    REMARK = 'remark'  # 备注
+    ROLE_CODE = 'role_code'  # 角色代码
     DELETED = 'deleted'  # 删除标记 enum:0,no,否#1,yes,是
     OPERATOR = 'operator'  # 操作员
     CREATE_TIME = 'create_time'  # 创建时间戳 单位秒
@@ -93,8 +73,6 @@ class TblUserRole(Base):
         'id',
         'user_account',
         'role_code',
-        'is_admin',
-        'remark',
         'deleted',
         'operator',
         'modify_time',

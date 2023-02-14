@@ -9,7 +9,7 @@ done < ./config.sh
 table_sum=1
 table_base_name="t_permission"
 
-mycmd="mysql -h$host -u$username -p$password -P$port --default-character-set=utf8mb4"
+mycmd="mysql -h$host -u$user_name -p$password -P$port --default-character-set=utf8mb4"
 for i in `seq 1 $table_sum`;
 do
 table_index=`expr $i - 1`
