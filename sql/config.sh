@@ -1,5 +1,5 @@
-db="robot_db"
+db="my_db"
 host="127.0.0.1"
 port="14006"
-username="robot"
-password="robot"
+username="my"
+password="my"

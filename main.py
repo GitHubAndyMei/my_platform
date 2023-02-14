@@ -1,5 +1,5 @@
 """
-    This project is about Robot management platform.
+    This project is about my management platform.
 """
 from flask import Flask
 

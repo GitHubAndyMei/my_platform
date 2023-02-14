@@ -1,15 +1,15 @@
 mysql:
   host: 127.0.0.1
   port: 14006
-  username: robot
-  password: robot
-  db: robot_db
+  username: my
+  password: my
+  db: my_db
   autocommit: true
 
 redis:
   host: 127.0.0.1
   port: 16379
-  password: robot
+  password: my
   charset: utf-8
   db: 0
   decode_response: True

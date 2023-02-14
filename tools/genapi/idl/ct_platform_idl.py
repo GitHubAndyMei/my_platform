@@ -36,7 +36,7 @@ Note:
 
 
 class Demo:
-    service(comment="示例服务", owner="andy.mei@robot.ai")
+    service(comment="示例服务", owner="andy.mei@my.ai")
     API(
         api(method="post", url="/api/v1/demo/add_demo", comment="添加demo"),
         request(
@@ -127,7 +127,7 @@ class RBAC:
 
 
 class Auth:
-    service(comment="认证服务", owner="andy.mei@robot.ai")
+    service(comment="认证服务", owner="andy.mei@my.ai")
     API(
         api(method="post", url="/api/v1/login", comment="登录"),
         request(

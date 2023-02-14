@@ -19,7 +19,7 @@ from app.api.auth.controller import RegisterView
 router = Blueprint('api', __name__)
 
 def route_register(app: Flask):
-	# service: 示例服务 owner: andy.mei@robot.ai
+	# service: 示例服务 owner: andy.mei@my.ai
 	router.add_url_rule('/api/v1/demo/add_demo', view_func = AddDemoView.as_view('add_demo')) # 1.添加demo
 	router.add_url_rule('/api/v1/demo/query_demo', view_func = QueryDemoView.as_view('query_demo')) # 2.查询demo
 	router.add_url_rule('/api/v1/demo/query_demos', view_func = QueryDemosView.as_view('query_demos')) # 3.查询demo列表
@@ -31,7 +31,7 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/menu_list', view_func = MenuListView.as_view('menu_list')) # 2.菜单列表
 	router.add_url_rule('/api/v1/menu_create', view_func = MenuCreateView.as_view('menu_create')) # 3.菜单创建
 
-	# service: 认证服务 owner: andy.mei@robot.ai
+	# service: 认证服务 owner: andy.mei@my.ai
 	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 1.登录
 	router.add_url_rule('/api/v1/register', view_func = RegisterView.as_view('register')) # 2.注册
 

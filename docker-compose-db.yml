@@ -4,13 +4,13 @@ services:
     build:
       context: deploy/mysql
       dockerfile: Dockerfile
-    container_name: robot_db
+    container_name: my_db
     restart: always
     ports:
       - 13306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root # root密码
-      MYSQL_DATABASE: robot_db
+      MYSQL_DATABASE: my_db
     volumes:
       - "/usr/local/docker/mydata/mysql/data:/var/lib/mysql" # 存放数据文件
       - "/usr/local/docker/mydata/mysql/log:/var/log/mysql"  # 存放日志文件
@@ -19,7 +19,7 @@ services:
     build:
       context: deploy/redis
       dockerfile: Dockerfile
-    container_name: robot_redis
+    container_name: my_redis
     volumes:
       - /usr/local/docker/mydata/redis/data:/data
     restart: always

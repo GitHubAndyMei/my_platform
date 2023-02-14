@@ -5,7 +5,7 @@ project config module
 """
 import os
 
-PROJECT_NAME = 'robot_platform'
+PROJECT_NAME = 'my_platform'
 PROJECT_PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 LOG_PATH = os.path.join(PROJECT_PATH, "log")
