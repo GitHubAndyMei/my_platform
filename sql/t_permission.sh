@@ -23,7 +23,6 @@ sql="
 create table $db.$table_name (
   F_id                     int(11)      NOT NULL AUTO_INCREMENT,
   F_permission_code        varchar(64)  NOT NULL DEFAULT ''  COMMENT '权限代码',
-  F_parent_permission_code varchar(64)  NOT NULL DEFAULT ''  COMMENT '父权限代码',
   F_permission_name        varchar(64)  NOT NULL DEFAULT ''  COMMENT '权限名称',
   F_url                    varchar(128) NOT NULL DEFAULT ''  COMMENT '路径地址',
   F_deleted                tinyint(1)   NOT NULL DEFAULT 0   COMMENT '删除标记 enum:0,no,否#1,yes,是',
