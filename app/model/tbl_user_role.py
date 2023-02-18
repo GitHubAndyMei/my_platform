@@ -4,6 +4,7 @@ table t_user_role data model.
 """
 
 import enum
+import hashlib
 from app.model.base import Base
 from sqlalchemy import (
     Column,
@@ -85,3 +86,6 @@ class TblUserRole(Base):
 
         return value_json
 
+
+    def generate_code(self):
+        return self.__tablename__ + hashlib.md5().hexdigest()

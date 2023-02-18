@@ -17,7 +17,6 @@ from app.api.rbac.controller import AlterRoleView
 from app.api.rbac.controller import QueryRolesView
 from app.api.rbac.controller import AddPermissionView
 from app.api.rbac.controller import DeletePermissionView
-from app.api.rbac.controller import AlterPermissionView
 from app.api.rbac.controller import QueryPermissionsView
 from app.api.rbac.controller import AddUserPermissionView
 from app.api.rbac.controller import DeleteUserPermissionView
@@ -46,13 +45,12 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/RBAC/query_roles', view_func = QueryRolesView.as_view('query_roles')) # 4.查询角色列表
 	router.add_url_rule('/api/v1/RBAC/add_permission', view_func = AddPermissionView.as_view('add_permission')) # 5.增加权限
 	router.add_url_rule('/api/v1/RBAC/delete_permission', view_func = DeletePermissionView.as_view('delete_permission')) # 6.删除权限
-	router.add_url_rule('/api/v1/RBAC/alter_permission', view_func = AlterPermissionView.as_view('alter_permission')) # 7.修改权限
-	router.add_url_rule('/api/v1/RBAC/query_permissions', view_func = QueryPermissionsView.as_view('query_permissions')) # 8.查询权限列表
-	router.add_url_rule('/api/v1/RBAC/add_user_permission', view_func = AddUserPermissionView.as_view('add_user_permission')) # 9.增加角色权限
-	router.add_url_rule('/api/v1/RBAC/delete_user_permission', view_func = DeleteUserPermissionView.as_view('delete_user_permission')) # 10.删除角色权限
-	router.add_url_rule('/api/v1/RBAC/query_user_permissions', view_func = QueryUserPermissionsView.as_view('query_user_permissions')) # 11.查询角色权限
-	router.add_url_rule('/api/v1/RBAC/add_user_role', view_func = AddUserRoleView.as_view('add_user_role')) # 12.增加用户角色
-	router.add_url_rule('/api/v1/RBAC/delete_user_role', view_func = DeleteUserRoleView.as_view('delete_user_role')) # 13.删除用户角色
-	router.add_url_rule('/api/v1/RBAC/query_user_roles', view_func = QueryUserRolesView.as_view('query_user_roles')) # 14.查询用户角色
+	router.add_url_rule('/api/v1/RBAC/query_permissions', view_func = QueryPermissionsView.as_view('query_permissions')) # 7.查询权限列表
+	router.add_url_rule('/api/v1/RBAC/add_user_permission', view_func = AddUserPermissionView.as_view('add_user_permission')) # 8.增加角色权限
+	router.add_url_rule('/api/v1/RBAC/delete_user_permission', view_func = DeleteUserPermissionView.as_view('delete_user_permission')) # 9.删除角色权限
+	router.add_url_rule('/api/v1/RBAC/query_user_permissions', view_func = QueryUserPermissionsView.as_view('query_user_permissions')) # 10.查询角色权限
+	router.add_url_rule('/api/v1/RBAC/add_user_role', view_func = AddUserRoleView.as_view('add_user_role')) # 11.增加用户角色
+	router.add_url_rule('/api/v1/RBAC/delete_user_role', view_func = DeleteUserRoleView.as_view('delete_user_role')) # 12.删除用户角色
+	router.add_url_rule('/api/v1/RBAC/query_user_roles', view_func = QueryUserRolesView.as_view('query_user_roles')) # 13.查询用户角色
 
 	app.register_blueprint(router)

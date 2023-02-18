@@ -7,13 +7,32 @@ import json
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from permission_detail import *
 
 class QueryPermissionsResponse:
 	"""
 	查询权限列表
 	"""
 	def __init__(self) -> None:
+		self._permissions = []  # 角色列表
+		self._permissions_u = 0  # 角色列表设置标识
 		pass
+
+
+	# 角色列表
+	def set_permissions(self, permissions):
+		self._permissions = permissions
+		self._permissions_u = 1
+
+
+	@property
+	def is_set_permissions(self):
+		return self._permissions_u != 0
+
+
+	@property
+	def permissions(self):
+		return self._permissions
 
 
 	def to_dict(self) -> dict:
@@ -21,6 +40,9 @@ class QueryPermissionsResponse:
 		Convert object to dict and return
 		"""
 		data_dict = {}
+		data_dict["permissions"] = []
+		for node in self._permissions:
+			data_dict["permissions"].append( node.to_dict() )  # 角色列表
 
 		return data_dict
 
@@ -33,6 +55,11 @@ class QueryPermissionsResponse:
 		# check params
 
 		# parse params
+		for node in data_dict.get("permissions"):
+			obj = PermissionDetail()
+			obj.to_obj(node)
+			self._permissions.append(obj)  # 角色列表
+			self._permissions_u = 1
 
 
 	def to_json(self):

@@ -18,7 +18,7 @@ if [ $table_sum -eq 1 ];then
 	table_name=$table_base_name
 fi
 
-$mycmd -e "drop table if exists $db.$table_name;"
+echo "drop table if exists $db.$table_name;"
 sql="
 create table $db.$table_name (
   F_id                  int(11)       NOT NULL AUTO_INCREMENT,
@@ -36,6 +36,6 @@ create table $db.$table_name (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='菜单表';
 "
 
-$mycmd -e "$sql"
-echo "table: $table_name create success!"
+echo "$sql"
+
 done

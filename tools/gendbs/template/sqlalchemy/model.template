@@ -8,6 +8,7 @@ table ${TABLE.name} data model.
 """
 
 import enum
+import hashlib
 from app.model.base import Base
 from sqlalchemy import (
     Column,
@@ -165,3 +166,6 @@ class ${get_camel_style_name(CLASS_NAME)}(Base):
 
         return value_json
 
+
+    def generate_code(self):
+        return self.__tablename__ + hashlib.md5().hexdigest()

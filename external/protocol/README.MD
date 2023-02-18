@@ -219,18 +219,12 @@
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
-| role_code|string|1|64|角色代码|""|
 | role_name|string|1|64|角色名称|""|
-| is_admin|int|0|1|是否是管理员|0|
-| status|int|0|2|角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用|0|
 
 **请求示例：**
 ```json
 {
-	"role_code":"",
-	"role_name":"",
-	"is_admin":0,
-	"status":0
+	"role_name":""
 }
 ```
 
@@ -324,14 +318,10 @@
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
-| role_name|string|1|64|角色名称|""|
-| status|int|0|2|角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用|0|
 
 **请求示例：**
 ```json
 {
-	"role_name":"",
-	"status":0
 }
 ```
 
@@ -359,10 +349,14 @@
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
+| permission_name|string|1|64|角色代码|""|
+| url|string|1|64|角色名称|""|
 
 **请求示例：**
 ```json
 {
+	"permission_name":"",
+	"url":""
 }
 ```
 
@@ -388,10 +382,12 @@
 **request:**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
+| permission_code|string|1|64|角色代码|""|
 
 **请求示例：**
 ```json
 {
+	"permission_code":""
 }
 ```
 
@@ -409,36 +405,7 @@
 
 
 
-### 13.接口: 修改权限
-**类型:  **
-
-**url: /api/v1/RBAC/alter_permission **
-
-**request:**
-| 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
-| - | - | - | - | - | - |
-
-**请求示例：**
-```json
-{
-}
-```
-
-
-
-**response：**
-| 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
-| - | - | - | - | - | - |
-
-**应答示例：**
-```json
-{
-}
-```
-
-
-
-### 14.接口: 查询权限列表
+### 13.接口: 查询权限列表
 **类型:  **
 
 **url: /api/v1/RBAC/query_permissions **
@@ -458,16 +425,18 @@
 **response：**
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
+| permissions|vector<PermissionDetail>|||角色列表|[]|
 
 **应答示例：**
 ```json
 {
+	"permissions":[]
 }
 ```
 
 
 
-### 15.接口: 增加角色权限
+### 14.接口: 增加角色权限
 **类型:  **
 
 **url: /api/v1/RBAC/add_user_permission **
@@ -496,7 +465,7 @@
 
 
 
-### 16.接口: 删除角色权限
+### 15.接口: 删除角色权限
 **类型:  **
 
 **url: /api/v1/RBAC/delete_user_permission **
@@ -525,7 +494,7 @@
 
 
 
-### 17.接口: 查询角色权限
+### 16.接口: 查询角色权限
 **类型:  **
 
 **url: /api/v1/RBAC/query_user_permissions **
@@ -554,7 +523,7 @@
 
 
 
-### 18.接口: 增加用户角色
+### 17.接口: 增加用户角色
 **类型:  **
 
 **url: /api/v1/RBAC/add_user_role **
@@ -587,7 +556,7 @@
 
 
 
-### 19.接口: 删除用户角色
+### 18.接口: 删除用户角色
 **类型:  **
 
 **url: /api/v1/RBAC/delete_user_role **
@@ -620,7 +589,7 @@
 
 
 
-### 20.接口: 查询用户角色
+### 19.接口: 查询用户角色
 **类型:  **
 
 **url: /api/v1/RBAC/query_user_roles **
@@ -664,16 +633,12 @@
 | - | - | - | - | - | - |
 | role_code|string|1|64|角色代码|""|
 | role_name|string|1|64|角色名称|""|
-| is_admin|int|0|1|是否是管理员 enum:0,no,不是#1,yes,是|0|
-| status|int|0|2|角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用|0|
 
 **示例：**
 ```json
 {
 	"role_code":"",
-	"role_name":"",
-	"is_admin":0,
-	"status":0
+	"role_name":""
 }
 ```
 
@@ -683,18 +648,16 @@
 
 | 代码 | 数据类型 | 最小值 | 最大值 | 备注 | 默认值 |
 | - | - | - | - | - | - |
-| role_code|string|1|64|角色代码|""|
-| role_name|string|1|64|角色名称|""|
-| is_admin|int|0|1|是否是管理员 enum:0,no,不是#1,yes,是|0|
-| status|int|0|2|角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用|0|
+| permission_code|string|1|64|角色代码|""|
+| permission_name|string|1|64|角色名称|""|
+| url|int|0|1|是否是管理员 enum:0,no,不是#1,yes,是|0|
 
 **示例：**
 ```json
 {
-	"role_code":"",
-	"role_name":"",
-	"is_admin":0,
-	"status":0
+	"permission_code":"",
+	"permission_name":"",
+	"url":0
 }
 ```
 

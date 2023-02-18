@@ -99,15 +99,12 @@ class RoleDetail:
     info(comment="角色详情")
     param(name="role_code", type="string", min="1", max="64", comment=u"角色代码"),
     param(name="role_name", type="string", min="1", max="64", comment=u"角色名称"),
-    param(name="is_admin",  type="int",    min="0", max="1",  comment=u"是否是管理员 enum:0,no,不是#1,yes,是"),
-    param(name="status",    type="int",    min="0", max="2",  comment=u"角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用")
 
 class PermissionDetail:
     info(comment="权限详情")
-    param(name="role_code", type="string", min="1", max="64", comment=u"角色代码"),
-    param(name="role_name", type="string", min="1", max="64", comment=u"角色名称"),
-    param(name="is_admin",  type="int",    min="0", max="1",  comment=u"是否是管理员 enum:0,no,不是#1,yes,是"),
-    param(name="status",    type="int",    min="0", max="2",  comment=u"角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用")
+    param(name="permission_code", type="string", min="1", max="64", comment=u"角色代码"),
+    param(name="permission_name", type="string", min="1", max="64", comment=u"角色名称"),
+    param(name="url",  type="int",    min="0", max="1",  comment=u"是否是管理员 enum:0,no,不是#1,yes,是")
 
 class RBAC:
     service(comment="权限服务", owner="施意波")
@@ -115,10 +112,7 @@ class RBAC:
     API(
         api(method="post", url="/api/v1/RBAC/add_role",    comment="增加角色"),
         request(
-            param(name="role_code", type="string", min="1", max="64", comment=u"角色代码"),
             param(name="role_name", type="string", min="1", max="64", comment=u"角色名称"),
-            param(name="is_admin",  type="int",    min="0", max="1",  comment=u"是否是管理员"),
-            param(name="status",    type="int",    min="0", max="2",  comment=u"角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用")
         ),
         response(
         )
@@ -145,8 +139,7 @@ class RBAC:
     API(
         api(method="post", url="/api/v1/RBAC/query_roles", comment="查询角色列表"),
         request(
-            param(name="role_name", type="string", min="1", max="64", comment=u"角色名称"),
-            param(name="status",    type="int",    min="0", max="2",  comment=u"角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用")
+
         ),
         response(
             param(name="roles", type="vector<RoleDetail>", min="MIN", max="MAX", comment=u"角色列表"),
@@ -157,6 +150,8 @@ class RBAC:
     API(
         api(method="post", url="/api/v1/RBAC/add_permission",    comment="增加权限"),
         request(
+            param(name="permission_name", type="string", min="1", max="64", comment=u"角色代码"),
+            param(name="url", type="string", min="1", max="64", comment=u"角色名称")
         ),
         response(
         )
@@ -164,13 +159,8 @@ class RBAC:
     API(
         api(method="post", url="/api/v1/RBAC/delete_permission", comment="删除权限"),
         request(
-        ),
-        response(
-        )
-    )
-    API(
-        api(method="post", url="/api/v1/RBAC/alter_permission",  comment="修改权限"),
-        request(
+            param(name="permission_code", type="string", min="1", max="64", comment=u"角色代码"),
+
         ),
         response(
         )
@@ -180,6 +170,8 @@ class RBAC:
         request(
         ),
         response(
+            param(name="permissions", type="vector<PermissionDetail>", min="MIN", max="MAX", comment=u"角色列表"),
+
         )
     )
 

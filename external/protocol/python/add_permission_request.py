@@ -13,7 +13,43 @@ class AddPermissionRequest:
 	增加权限
 	"""
 	def __init__(self) -> None:
+		self._permission_name = ""  # 角色代码
+		self._permission_name_u = 0  # 角色代码设置标识
+		self._url = ""  # 角色名称
+		self._url_u = 0  # 角色名称设置标识
 		pass
+
+
+	# 角色代码
+	def set_permission_name(self, permission_name):
+		self._permission_name = permission_name
+		self._permission_name_u = 1
+
+
+	@property
+	def is_set_permission_name(self):
+		return self._permission_name_u != 0
+
+
+	@property
+	def permission_name(self):
+		return self._permission_name
+
+
+	# 角色名称
+	def set_url(self, url):
+		self._url = url
+		self._url_u = 1
+
+
+	@property
+	def is_set_url(self):
+		return self._url_u != 0
+
+
+	@property
+	def url(self):
+		return self._url
 
 
 	def to_dict(self) -> dict:
@@ -21,6 +57,8 @@ class AddPermissionRequest:
 		Convert object to dict and return
 		"""
 		data_dict = {}
+		data_dict["permission_name"] = self._permission_name  # 角色代码
+		data_dict["url"] = self._url  # 角色名称
 
 		return data_dict
 
@@ -31,8 +69,18 @@ class AddPermissionRequest:
 		"""
 
 		# check params
+		if len( data_dict.get("permission_name") ) < 1:
+			raise Exception("param:permission_name error, out of range min:1!")
+		if len( data_dict.get("permission_name") ) > 64:
+			raise Exception("param:permission_name error, out of range max:64!")
+		if len( data_dict.get("url") ) < 1:
+			raise Exception("param:url error, out of range min:1!")
+		if len( data_dict.get("url") ) > 64:
+			raise Exception("param:url error, out of range max:64!")
 
 		# parse params
+		self.set_permission_name( data_dict.get("permission_name") )  # 角色代码
+		self.set_url( data_dict.get("url") )  # 角色名称
 
 
 	def to_json(self):

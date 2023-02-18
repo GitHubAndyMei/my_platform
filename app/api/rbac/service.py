@@ -6,19 +6,44 @@ from common.mydb import mydb
 from middleware.decorator import *
 
 from app.model.tbl_user import TblUser
+from app.model.tbl_permission import TblPermission
 from app.model.tbl_user_role import TblUserRole
 from app.model.tbl_role import TblRole
 from app.model.tbl_menu import TblMenu
 from common.result_code import IS_NOT_ADMIN,ERR_PASSWORD,ERR_USER_EXISTS
 
-
-from external.protocol.python.alter_role_request import AlterRoleRequest
-from external.protocol.python.alter_role_response import AlterRoleResponse
 from external.protocol.python.menu_create_request import MenuCreateRequest
 from external.protocol.python.menu_create_response import MenuCreateResponse
 from external.protocol.python.menu_list_request import MenuListRequest
 from external.protocol.python.menu_list_response import MenuListResponse
-
+from external.protocol.python.add_permission_request import AddPermissionRequest
+from external.protocol.python.add_permission_response import AddPermissionResponse
+from external.protocol.python.add_role_request import AddRoleRequest
+from external.protocol.python.add_role_response import AddRoleResponse
+from external.protocol.python.add_user_permission_request import AddUserPermissionRequest
+from external.protocol.python.add_user_permission_response import AddUserPermissionResponse
+from external.protocol.python.add_user_role_request import AddUserRoleRequest
+from external.protocol.python.add_user_role_response import AddUserRoleResponse
+from external.protocol.python.alter_role_request import AlterRoleRequest
+from external.protocol.python.alter_role_response import AlterRoleResponse
+from external.protocol.python.delete_permission_request import DeletePermissionRequest
+from external.protocol.python.delete_permission_response import DeletePermissionResponse
+from external.protocol.python.delete_role_request import DeleteRoleRequest
+from external.protocol.python.delete_role_response import DeleteRoleResponse
+from external.protocol.python.delete_user_permission_request import DeleteUserPermissionRequest
+from external.protocol.python.delete_user_permission_response import DeleteUserPermissionResponse
+from external.protocol.python.delete_user_role_request import DeleteUserRoleRequest
+from external.protocol.python.delete_user_role_response import DeleteUserRoleResponse
+from external.protocol.python.query_permissions_request import QueryPermissionsRequest
+from external.protocol.python.query_permissions_response import QueryPermissionsResponse
+from external.protocol.python.query_roles_request import QueryRolesRequest
+from external.protocol.python.query_roles_response import QueryRolesResponse
+from external.protocol.python.query_user_permissions_request import QueryUserPermissionsRequest
+from external.protocol.python.query_user_permissions_response import QueryUserPermissionsResponse
+from external.protocol.python.query_user_roles_request import QueryUserRolesRequest
+from external.protocol.python.query_user_roles_response import QueryUserRolesResponse
+from external.protocol.python.role_detail import *
+from external.protocol.python.permission_detail import PermissionDetail
 
 class RBACService(object):
     """
@@ -46,27 +71,133 @@ class RBACService(object):
 
     @classmethod
     @login_require
-    def menu_list(cls, request: MenuListRequest, response: MenuListResponse):
+    def add_role(cls, request: AddRoleRequest, response: AddRoleResponse):
         """
-        菜单列表
+        增加角色
         """
-        tbl_menu_list = mydb.query(TblMenu).all()
+        tbl_role = mydb.query(TblRole).filter(TblRole.role_name == request.role_name).first()
+        if tbl_role:
+            return
 
-        response_list = []
-        for tbl_menu in tbl_menu_list:
-            response_list.append(tbl_menu.to_json())
-        response.set_menu_list(response_list)
+        tbl_role = TblRole()
+        tbl_role.role_code = tbl_role.generate_code()
+        tbl_role.role_name = request.role_name
+
+        mydb.add(tbl_role)
+        mydb.commit()
 
     @classmethod
     @login_require
-    def menu_create(cls, request: MenuCreateRequest, response: MenuCreateResponse):
+    def delete_role(cls, request: DeleteRoleRequest, response: DeleteRoleResponse):
         """
-        菜单创建
+        删除角色
         """
-        tbl_menu = TblMenu()
-        tbl_menu.menu_name = request.menu_name
-        tbl_menu.icon = request.icon
-        tbl_menu.parent = request.parent_code
+        tbl_role = mydb.query(TblRole).filter(TblRole.role_code == request.role_code).first()
+        tbl_role.deleted = 1
 
-        mydb.add(tbl_menu)
+        mydb.add(tbl_role)
         mydb.commit()
+
+
+    @classmethod
+    @login_require
+    def query_roles(cls, request: QueryRolesRequest, response: QueryRolesResponse):
+        """
+        查询角色列表
+        """
+        tbl_roles = mydb.query(TblRole).all()
+        res = []
+        for t in tbl_roles:
+            role = RoleDetail()
+            role.set_role_code(t.role_code)
+            role.set_role_name(t.role_name)
+            res.append(role)
+
+        response.set_roles(res)
+
+    @classmethod
+    @login_require
+    def add_permission(cls, request: AddPermissionRequest, response: AddPermissionResponse):
+        """
+        增加权限
+        """
+        tbl_permission = mydb.query(TblPermission).filter(TblPermission.role_name == request.url).first()
+        if tbl_permission:
+            return
+
+        tbl_permission = TblPermission()
+        tbl_permission.permission_code = tbl_permission.generate_code()
+        tbl_permission.permission_name = request.permission_name
+        tbl_permission.url = request.url
+
+        mydb.add(tbl_permission)
+        mydb.commit()
+
+    @classmethod
+    def delete_permission(cls, request: DeletePermissionRequest, response: DeletePermissionResponse):
+        """
+        删除权限
+        """
+        tbl_permission = mydb.query(TblPermission).filter(TblPermission.permission_code == request.permission_code).first()
+        tbl_permission.deleted = 1
+
+        mydb.add(tbl_permission)
+        mydb.commit()
+
+    @classmethod
+    def query_permissions(cls, request: QueryPermissionsRequest, response: QueryPermissionsResponse):
+        """
+        查询权限列表
+        """
+        tbl_permission = mydb.query(TblPermission).all()
+        res = []
+        for t in tbl_permission:
+            permission = PermissionDetail()
+            permission.set_permission_code(t.permission_code)
+            permission.set_permission_name(t.permission_name)
+            permission.set_url(t.url)
+            res.append(permission)
+
+        response.set_permissions(res)
+
+    @classmethod
+    def add_user_permission(cls, request: AddUserPermissionRequest, response: AddUserPermissionResponse):
+        """
+        增加角色权限
+        """
+        pass
+
+    @classmethod
+    def delete_user_permission(cls, request: DeleteUserPermissionRequest, response: DeleteUserPermissionResponse):
+        """
+        删除角色权限
+        """
+        pass
+
+    @classmethod
+    def query_user_permissions(cls, request: QueryUserPermissionsRequest, response: QueryUserPermissionsResponse):
+        """
+        查询角色权限
+        """
+        pass
+
+    @classmethod
+    def add_user_role(cls, request: AddUserRoleRequest, response: AddUserRoleResponse):
+        """
+        增加用户角色
+        """
+        pass
+
+    @classmethod
+    def delete_user_role(cls, request: DeleteUserRoleRequest, response: DeleteUserRoleResponse):
+        """
+        删除用户角色
+        """
+        pass
+
+    @classmethod
+    def query_user_roles(cls, request: QueryUserRolesRequest, response: QueryUserRolesResponse):
+        """
+        查询用户角色
+        """
+        pass

@@ -11,8 +11,6 @@ from external.protocol.python.add_user_permission_request import AddUserPermissi
 from external.protocol.python.add_user_permission_response import AddUserPermissionResponse
 from external.protocol.python.add_user_role_request import AddUserRoleRequest
 from external.protocol.python.add_user_role_response import AddUserRoleResponse
-from external.protocol.python.alter_permission_request import AlterPermissionRequest
-from external.protocol.python.alter_permission_response import AlterPermissionResponse
 from external.protocol.python.alter_role_request import AlterRoleRequest
 from external.protocol.python.alter_role_response import AlterRoleResponse
 from external.protocol.python.delete_permission_request import DeletePermissionRequest
@@ -23,6 +21,7 @@ from external.protocol.python.delete_user_permission_request import DeleteUserPe
 from external.protocol.python.delete_user_permission_response import DeleteUserPermissionResponse
 from external.protocol.python.delete_user_role_request import DeleteUserRoleRequest
 from external.protocol.python.delete_user_role_response import DeleteUserRoleResponse
+from external.protocol.python.permission_detail import *
 from external.protocol.python.query_permissions_request import QueryPermissionsRequest
 from external.protocol.python.query_permissions_response import QueryPermissionsResponse
 from external.protocol.python.query_roles_request import QueryRolesRequest
@@ -81,14 +80,6 @@ class RBACService(object):
 	def delete_permission(cls, request: DeletePermissionRequest, response: DeletePermissionResponse):
 		"""
 		删除权限
-		"""
-		pass
-
-
-	@classmethod
-	def alter_permission(cls, request: AlterPermissionRequest, response: AlterPermissionResponse):
-		"""
-		修改权限
 		"""
 		pass
 

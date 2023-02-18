@@ -4,6 +4,7 @@ table t_menu data model.
 """
 
 import enum
+import hashlib
 from app.model.base import Base
 from sqlalchemy import (
     Column,
@@ -91,3 +92,6 @@ class TblMenu(Base):
 
         return value_json
 
+
+    def generate_code(self):
+        return self.__tablename__ + hashlib.md5().hexdigest()

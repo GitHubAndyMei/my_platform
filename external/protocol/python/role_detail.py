@@ -17,10 +17,6 @@ class RoleDetail:
 		self._role_code_u = 0  # 角色代码设置标识
 		self._role_name = ""  # 角色名称
 		self._role_name_u = 0  # 角色名称设置标识
-		self._is_admin = 0  # 是否是管理员 enum:0,no,不是#1,yes,是
-		self._is_admin_u = 0  # 是否是管理员 enum:0,no,不是#1,yes,是设置标识
-		self._status = 0  # 角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用
-		self._status_u = 0  # 角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用设置标识
 		pass
 
 
@@ -56,38 +52,6 @@ class RoleDetail:
 		return self._role_name
 
 
-	# 是否是管理员 enum:0,no,不是#1,yes,是
-	def set_is_admin(self, is_admin):
-		self._is_admin = is_admin
-		self._is_admin_u = 1
-
-
-	@property
-	def is_set_is_admin(self):
-		return self._is_admin_u != 0
-
-
-	@property
-	def is_admin(self):
-		return self._is_admin
-
-
-	# 角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用
-	def set_status(self, status):
-		self._status = status
-		self._status_u = 1
-
-
-	@property
-	def is_set_status(self):
-		return self._status_u != 0
-
-
-	@property
-	def status(self):
-		return self._status
-
-
 	def to_dict(self) -> dict:
 		"""
 		Convert object to dict and return
@@ -95,8 +59,6 @@ class RoleDetail:
 		data_dict = {}
 		data_dict["role_code"] = self._role_code  # 角色代码
 		data_dict["role_name"] = self._role_name  # 角色名称
-		data_dict["is_admin"] = self._is_admin  # 是否是管理员 enum:0,no,不是#1,yes,是
-		data_dict["status"] = self._status  # 角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用
 
 		return data_dict
 
@@ -115,20 +77,10 @@ class RoleDetail:
 			raise Exception("param:role_name error, out of range min:1!")
 		if len( data_dict.get("role_name") ) > 64:
 			raise Exception("param:role_name error, out of range max:64!")
-		if data_dict.get("is_admin") < 0:
-			raise Exception("param:is_admin error, out of range min:0!")
-		if data_dict.get("is_admin") > 1:
-			raise Exception("param:is_admin error, out of range max:1!")
-		if data_dict.get("status") < 0:
-			raise Exception("param:status error, out of range min:0!")
-		if data_dict.get("status") > 2:
-			raise Exception("param:status error, out of range max:2!")
 
 		# parse params
 		self.set_role_code( data_dict.get("role_code") )  # 角色代码
 		self.set_role_name( data_dict.get("role_name") )  # 角色名称
-		self.set_is_admin( data_dict.get("is_admin") )  # 是否是管理员 enum:0,no,不是#1,yes,是
-		self.set_status( data_dict.get("status") )  # 角色状态 enum:0,ensure,待审核#1,normal,正常#2,stop,禁用
 
 
 	def to_json(self):

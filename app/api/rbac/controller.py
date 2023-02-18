@@ -15,8 +15,6 @@ from external.protocol.python.add_user_permission_request import AddUserPermissi
 from external.protocol.python.add_user_permission_response import AddUserPermissionResponse
 from external.protocol.python.add_user_role_request import AddUserRoleRequest
 from external.protocol.python.add_user_role_response import AddUserRoleResponse
-from external.protocol.python.alter_permission_request import AlterPermissionRequest
-from external.protocol.python.alter_permission_response import AlterPermissionResponse
 from external.protocol.python.alter_role_request import AlterRoleRequest
 from external.protocol.python.alter_role_response import AlterRoleResponse
 from external.protocol.python.delete_permission_request import DeletePermissionRequest
@@ -27,6 +25,7 @@ from external.protocol.python.delete_user_permission_request import DeleteUserPe
 from external.protocol.python.delete_user_permission_response import DeleteUserPermissionResponse
 from external.protocol.python.delete_user_role_request import DeleteUserRoleRequest
 from external.protocol.python.delete_user_role_response import DeleteUserRoleResponse
+from external.protocol.python.permission_detail import *
 from external.protocol.python.query_permissions_request import QueryPermissionsRequest
 from external.protocol.python.query_permissions_response import QueryPermissionsResponse
 from external.protocol.python.query_roles_request import QueryRolesRequest
@@ -101,17 +100,6 @@ class DeletePermissionView(BaseView):
     response_protocol = DeletePermissionResponse
     view_func = {
         "post": RBACService.delete_permission
-    }
-
-class AlterPermissionView(BaseView):
-    """
-    修改权限
-    """
-    methods = ["POST"]  # 允许的请求方式
-    request_protocol  = AlterPermissionRequest
-    response_protocol = AlterPermissionResponse
-    view_func = {
-        "post": RBACService.alter_permission
     }
 
 class QueryPermissionsView(BaseView):

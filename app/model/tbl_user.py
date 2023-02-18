@@ -4,6 +4,7 @@ table t_user data model.
 """
 
 import enum
+import hashlib
 from app.model.base import Base
 from sqlalchemy import (
     Column,
@@ -89,3 +90,6 @@ class TblUser(Base):
 
         return value_json
 
+
+    def generate_code(self):
+        return self.__tablename__ + hashlib.md5().hexdigest()

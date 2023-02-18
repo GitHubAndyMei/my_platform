@@ -4,6 +4,7 @@ table t_permission data model.
 """
 
 import enum
+import hashlib
 from app.model.base import Base
 from sqlalchemy import (
     Column,
@@ -45,7 +46,6 @@ class TblPermission(Base):
     # 字段定义
     id = Column(Integer, name='F_id', comment='', primary_key=True, autoincrement=True)
     permission_code = Column(String(64), name='F_permission_code', comment='权限代码', nullable=False, default='')
-    parent_permission_code = Column(String(64), name='F_parent_permission_code', comment='父权限代码', nullable=False, default='')
     permission_name = Column(String(64), name='F_permission_name', comment='权限名称', nullable=False, default='')
     url = Column(String(128), name='F_url', comment='路径地址', nullable=False, default='')
     deleted = Column(SmallInteger, name='F_deleted', comment='删除标记 enum:0,no,否#1,yes,是', nullable=False, default=0)
@@ -64,7 +64,6 @@ class TblPermission(Base):
     # 字段别名
     ID = 'id'  # 
     PERMISSION_CODE = 'permission_code'  # 权限代码
-    PARENT_PERMISSION_CODE = 'parent_permission_code'  # 父权限代码
     PERMISSION_NAME = 'permission_name'  # 权限名称
     URL = 'url'  # 路径地址
     DELETED = 'deleted'  # 删除标记 enum:0,no,否#1,yes,是
@@ -76,7 +75,6 @@ class TblPermission(Base):
     UP_COLUMNS = [
         'id',
         'permission_code',
-        'parent_permission_code',
         'permission_name',
         'url',
         'deleted',
@@ -91,3 +89,6 @@ class TblPermission(Base):
 
         return value_json
 
+
+    def generate_code(self):
+        return self.__tablename__ + hashlib.md5().hexdigest()

@@ -13,7 +13,25 @@ class DeletePermissionRequest:
 	删除权限
 	"""
 	def __init__(self) -> None:
+		self._permission_code = ""  # 角色代码
+		self._permission_code_u = 0  # 角色代码设置标识
 		pass
+
+
+	# 角色代码
+	def set_permission_code(self, permission_code):
+		self._permission_code = permission_code
+		self._permission_code_u = 1
+
+
+	@property
+	def is_set_permission_code(self):
+		return self._permission_code_u != 0
+
+
+	@property
+	def permission_code(self):
+		return self._permission_code
 
 
 	def to_dict(self) -> dict:
@@ -21,6 +39,7 @@ class DeletePermissionRequest:
 		Convert object to dict and return
 		"""
 		data_dict = {}
+		data_dict["permission_code"] = self._permission_code  # 角色代码
 
 		return data_dict
 
@@ -31,8 +50,13 @@ class DeletePermissionRequest:
 		"""
 
 		# check params
+		if len( data_dict.get("permission_code") ) < 1:
+			raise Exception("param:permission_code error, out of range min:1!")
+		if len( data_dict.get("permission_code") ) > 64:
+			raise Exception("param:permission_code error, out of range max:64!")
 
 		# parse params
+		self.set_permission_code( data_dict.get("permission_code") )  # 角色代码
 
 
 	def to_json(self):
