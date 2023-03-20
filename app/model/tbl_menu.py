@@ -95,3 +95,7 @@ class TblMenu(Base):
 
     def generate_code(self):
         return self.__tablename__ + hashlib.md5().hexdigest()
+
+
+
+w

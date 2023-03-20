@@ -23,8 +23,10 @@ sql="
 create table $db.$table_name (
   F_id                  int(11)       NOT NULL AUTO_INCREMENT,
   F_menu_code           varchar(64)   NOT NULL DEFAULT ''    COMMENT '菜单代码',
+  F_path                varchar(128)  NOT NULL DEFAULT ''    COMMENT '菜单路径',
   F_parent_menu_code    varchar(64)   NOT NULL DEFAULT ''    COMMENT '父菜单代码',
   F_menu_name           varchar(64)   NOT NULL DEFAULT ''    COMMENT '菜单名称',
+  F_meta                json          NOT NULL DEFAULT ''    COMMENT '元数据',
   F_sort                int(11)       NOT NULL DEFAULT '999' COMMENT '排序位置, 默认最后一个',
   F_deleted             tinyint(1)    NOT NULL DEFAULT 0     COMMENT '删除标记 enum:0,no,否#1,yes,是',
   F_operator            varchar(32)   NOT NULL DEFAULT ''    COMMENT '操作员',

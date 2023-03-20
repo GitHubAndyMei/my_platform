@@ -109,8 +109,9 @@
 | - | - | - | - | - |
 | F_id|int(11)|Y|唯一id|None|
 | F_user_account|varchar(64)||用户账号||
-| F_user_name|varchar(64)||用户名称||
+| F_username|varchar(64)||用户名称||
 | F_password|varchar(64)||用户密码||
+| F_desc|varchar(64)||用户描述||
 | F_deleted|tinyint(1)||删除标记 enum:0,no,否#1,yes,是|0|
 | F_operator|varchar(64)||操作员||
 | F_create_time|bigint(20)||创建时间戳 单位秒|0|
@@ -119,11 +120,11 @@
 
 唯一索引:unique_index_t_user_user_account  索引字段: F_user_account
 
-唯一索引:unique_index_t_user_user_name  索引字段: F_user_name
+唯一索引:unique_index_t_user_user_name  索引字段: F_username
 
 普通索引:unique_index_t_user_user_name  索引字段: F_user_account
 
-普通索引:unique_index_t_user_user_name  索引字段: F_user_name
+普通索引:unique_index_t_user_user_name  索引字段: F_username
 
 
 

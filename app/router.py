@@ -9,8 +9,6 @@ from app.api.demo.controller import AddDemoView
 from app.api.demo.controller import DeleteDemoView
 from app.api.demo.controller import AlterDemoView
 from app.api.demo.controller import QueryDemosView
-from app.api.auth.controller import LoginView
-from app.api.auth.controller import RegisterView
 from app.api.rbac.controller import AddRoleView
 from app.api.rbac.controller import DeleteRoleView
 from app.api.rbac.controller import AlterRoleView
@@ -24,6 +22,9 @@ from app.api.rbac.controller import QueryUserPermissionsView
 from app.api.rbac.controller import AddUserRoleView
 from app.api.rbac.controller import DeleteUserRoleView
 from app.api.rbac.controller import QueryUserRolesView
+from app.api.auth.controller import LoginView
+from app.api.auth.controller import RegisterView
+from app.api.auth.controller import GetUserInfoView
 
 router = Blueprint('api', __name__)
 
@@ -33,10 +34,6 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/demo/delete_demo', view_func = DeleteDemoView.as_view('delete_demo')) # 2.删除demo
 	router.add_url_rule('/api/v1/demo/alter_demo', view_func = AlterDemoView.as_view('alter_demo')) # 3.修改demo
 	router.add_url_rule('/api/v1/demo/query_demos', view_func = QueryDemosView.as_view('query_demos')) # 4.查询demo列表
-
-	# service: 认证服务 owner: 施意波
-	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 1.登录
-	router.add_url_rule('/api/v1/register', view_func = RegisterView.as_view('register')) # 2.注册
 
 	# service: 权限服务 owner: 施意波
 	router.add_url_rule('/api/v1/RBAC/add_role', view_func = AddRoleView.as_view('add_role')) # 1.增加角色
@@ -52,5 +49,10 @@ def route_register(app: Flask):
 	router.add_url_rule('/api/v1/RBAC/add_user_role', view_func = AddUserRoleView.as_view('add_user_role')) # 11.增加用户角色
 	router.add_url_rule('/api/v1/RBAC/delete_user_role', view_func = DeleteUserRoleView.as_view('delete_user_role')) # 12.删除用户角色
 	router.add_url_rule('/api/v1/RBAC/query_user_roles', view_func = QueryUserRolesView.as_view('query_user_roles')) # 13.查询用户角色
+
+	# service: 认证服务 owner: 施意波
+	router.add_url_rule('/api/v1/login', view_func = LoginView.as_view('login')) # 1.登录
+	router.add_url_rule('/api/v1/register', view_func = RegisterView.as_view('register')) # 2.注册
+	router.add_url_rule('/api/v1/get_user_info', view_func = GetUserInfoView.as_view('get_user_info')) # 3.获取用户信息
 
 	app.register_blueprint(router)

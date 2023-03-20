@@ -73,27 +73,6 @@ class Demo:
     )
 
 
-class Auth:
-    service(comment="认证服务", owner="施意波")
-    API(
-        api(method="post", url="/api/v1/login", comment="登录"),
-        request(
-            param(name="user_name", type="string", min="1", max="64", comment=u"用户名称"),
-            param(name="password",  type="string", min="1", max="64", comment=u"密码")
-        ),
-        response(
-            param(name="jwt", type="string", min="1", max="32", comment=u"jwt"),
-        )
-    )
-    API(
-        api(method="post", url="/api/v1/register", comment="注册"),
-        request(
-            param(name="user_name", type="string", min="1", max="64", comment=u"用户名称"),
-            param(name="password",  type="string", min="1", max="64", comment=u"密码")
-        ),
-        response(
-        )
-    )
 
 class RoleDetail:
     info(comment="角色详情")
@@ -226,3 +205,37 @@ class RBAC:
             param(name="roles",        type="vector<RoleDetail>", min="MIN", max="MAX",  comment=u"角色列表"),
         )
     )
+
+
+class Auth:
+    service(comment="认证服务", owner="施意波")
+    API(
+        api(method="post", url="/api/v1/login", comment="登录"),
+        request(
+            param(name="username", type="string", min="1", max="64", comment=u"用户名称"),
+            param(name="password",  type="string", min="1", max="64", comment=u"密码")
+        ),
+        response(
+            param(name="token", type="string", min="1", max="32", comment=u"token"),
+        )
+    )
+    API(
+        api(method="post", url="/api/v1/register", comment="注册"),
+        request(
+            param(name="username", type="string", min="1", max="64", comment=u"用户名称"),
+            param(name="password",  type="string", min="1", max="64", comment=u"密码")
+        ),
+        response(
+        )
+    )
+    API(
+        api(method="post", url="/api/v1/get_user_info", comment="获取用户信息"),
+        request(
+        ),
+        response(
+            param(name="desc", type="string", min="1", max="32", comment=u"desc"),
+            param(name="username", type="string", min="1", max="32", comment=u"desc"),
+            param(name="roles", type="vector<RoleDetail>", min="MIN", max="MAX", comment=u"角色列表"),
+        )
+    )
+

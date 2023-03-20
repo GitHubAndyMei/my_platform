@@ -13,25 +13,25 @@ class LoginResponse:
 	登录
 	"""
 	def __init__(self) -> None:
-		self._jwt = ""  # jwt
-		self._jwt_u = 0  # jwt设置标识
+		self._token = ""  # token
+		self._token_u = 0  # token设置标识
 		pass
 
 
-	# jwt
-	def set_jwt(self, jwt):
-		self._jwt = jwt
-		self._jwt_u = 1
+	# token
+	def set_token(self, token):
+		self._token = token
+		self._token_u = 1
 
 
 	@property
-	def is_set_jwt(self):
-		return self._jwt_u != 0
+	def is_set_token(self):
+		return self._token_u != 0
 
 
 	@property
-	def jwt(self):
-		return self._jwt
+	def token(self):
+		return self._token
 
 
 	def to_dict(self) -> dict:
@@ -39,7 +39,7 @@ class LoginResponse:
 		Convert object to dict and return
 		"""
 		data_dict = {}
-		data_dict["jwt"] = self._jwt  # jwt
+		data_dict["token"] = self._token  # token
 
 		return data_dict
 
@@ -50,13 +50,13 @@ class LoginResponse:
 		"""
 
 		# check params
-		if len( data_dict.get("jwt") ) < 1:
-			raise Exception("param:jwt error, out of range min:1!")
-		if len( data_dict.get("jwt") ) > 32:
-			raise Exception("param:jwt error, out of range max:32!")
+		if len( data_dict.get("token") ) < 1:
+			raise Exception("param:token error, out of range min:1!")
+		if len( data_dict.get("token") ) > 32:
+			raise Exception("param:token error, out of range max:32!")
 
 		# parse params
-		self.set_jwt( data_dict.get("jwt") )  # jwt
+		self.set_token( data_dict.get("token") )  # token
 
 
 	def to_json(self):

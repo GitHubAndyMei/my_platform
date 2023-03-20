@@ -7,10 +7,13 @@ from app.api.base.controller import BaseView
 from app.api.auth.service import AuthService
 from middleware.decorator import *
 
+from external.protocol.python.get_user_info_request import GetUserInfoRequest
+from external.protocol.python.get_user_info_response import GetUserInfoResponse
 from external.protocol.python.login_request import LoginRequest
 from external.protocol.python.login_response import LoginResponse
 from external.protocol.python.register_request import RegisterRequest
 from external.protocol.python.register_response import RegisterResponse
+from external.protocol.python.role_detail import *
 
 class LoginView(BaseView):
     """
@@ -32,5 +35,16 @@ class RegisterView(BaseView):
     response_protocol = RegisterResponse
     view_func = {
         "post": AuthService.register
+    }
+
+class GetUserInfoView(BaseView):
+    """
+    获取用户信息
+    """
+    methods = ["POST"]  # 允许的请求方式
+    request_protocol  = GetUserInfoRequest
+    response_protocol = GetUserInfoResponse
+    view_func = {
+        "post": AuthService.get_user_info
     }
 
